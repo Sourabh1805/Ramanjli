@@ -19,7 +19,8 @@ class CreateDoctorUserSeeder extends Seeder
         $user = User::create([
             'name' => 'Dr. ABC', 
             'email' => 'cba@gmail.com',
-            'password' => bcrypt('123456')
+            'password' => bcrypt('123456'),
+            'mobile_no' => '9112128837'
         ]);
     
         $role = Role::create(['name' => 'Doctor']);

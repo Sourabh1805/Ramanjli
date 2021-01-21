@@ -56,6 +56,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
+            'mobile_no' => 'required',
             'roles' => 'required'
         ]);
     
@@ -112,6 +113,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
+            'mobile_no' => 'required',
             'roles' => 'required'
         ]);
     

@@ -16,6 +16,7 @@ class Appointment extends Model
         'patient_name',
         'reason', 
         'appointment_status', 
-        'Time_and_Date'
+        'Time_and_Date',
+        'book_date'
     ];
 }

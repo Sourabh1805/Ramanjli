@@ -20,7 +20,7 @@ class CreatePatientsTable extends Migration
             $table->date('Patient_dob');
             $table->string('Patient_gender');
             $table->string('Secret_key');
-            $table->string('Patient_status');
+            $table->string('Patient_status')->default(0);
             $table->timestamps();
         });
     }

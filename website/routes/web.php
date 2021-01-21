@@ -12,6 +12,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\PasswordManagementController;
 use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PatientController;
 
 Route::get('/', function () {
     return view('WELCOME');
@@ -29,7 +30,7 @@ Route::POST('verifyOTP', [PasswordManagementController::class, 'verifyOTP'])->na
 Auth::routes();
 
 Route::get('home', [HomeController::class, 'index'])->name('home');
-
+Route::resource('patients', PatientController::class);
 Route::group(['middleware' => ['auth']], function() {
     Route::get('home', [HomeController::class, 'index'])->name('home');
 
@@ -49,7 +50,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('phpfirebase_sdk', [FirebaseController::class, 'index'])->name('index');
 
 
-Route::resource('doctor', DoctorController::class);
+    Route::resource('doctor', DoctorController::class);
     
     
     Route::POST('resetpassword', [PasswordManagementController::class, 'resetpassword'])->name('resetpassword');

@@ -1,0 +1,4 @@
+logo color =(0,90,80,0) // red
+logo color =(0,90,80,0) // dark greay
+logo color = (35  27 27 11) // light greay
+background  = (0 0 0 0)

@@ -21,10 +21,14 @@ class CreateDoctorsTable extends Migration
             $table->string("Doctor_specialization");
             $table->string("Doctor_address");
             $table->string("Doctor_contact_number");
-            $table->string("Doctor_maximum_number_of_appointments");
+            $table->string("Doctor_clinic_max_appointments");
             $table->time("Doctor_clinic_time_from");
             $table->time("Doctor_clinic_time_to");
-            $table->string("Doctor_holiday"); 
+            $table->string("Doctor_clinic_holiday"); 
+            $table->string("Doctor_homevisit_max_appointments");
+            $table->time("Doctor_homevisit_time_from");
+            $table->time("Doctor_homevisit_time_to");
+            $table->string("Doctor_homevisit_holiday"); 
             $table->timestamps();
         });
     }

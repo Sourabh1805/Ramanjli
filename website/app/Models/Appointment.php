@@ -12,11 +12,11 @@ class Appointment extends Model
     protected $primaryKey = "Appointment_id"; 
 
     protected $fillable = [
-        'patient_id',
-        'patient_name',
-        'reason', 
-        'appointment_status', 
-        'Time_and_Date',
-        'book_date'
+        'Appointment_patient_id',
+        'Appointment_reason',
+        'Appointment_date', 
+        'Appointment_charges', 
+        'Appointment_status',
+        'Appointment_isPaymentComplete'
     ];
 }

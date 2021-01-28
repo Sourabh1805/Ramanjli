@@ -1,18 +1,22 @@
-const wallieLogo = require("../assets/images/wallie-logo.png");
-const banner = require("../assets/images/banner.png");
-const promoBanner = require("../assets/images/promo-banner.png");
-const focus = require("../assets/images/focus.png");
+const logoLarge = require("../assets/images/logo/logo-large.png");
+const logoExtralarge = require("../assets/images/logo/logo-Extralarge.png");
+const logoMedium = require("../assets/images/logo/logo-medium.png");
 
-// Dummy
-const usFlag = require("../assets/images/us-flag.jpg");
+const visitingCard = require("../assets/images/logo/visiting-card.png");
+
+const logoText= require("../assets/images/logo/logoText.png");
+
+const ProfileImageReactangle = require("../assets/images/DoctorImages/reactangleImage.jpg");
+
+
+
 
 
 export default {
-    wallieLogo,
-    banner,
-    promoBanner,
-    focus,
-
-    // Dummy
-    usFlag
+    logoLarge,
+    logoExtralarge,
+    visitingCard,
+    logoMedium,
+    ProfileImageReactangle,
+    logoText
 }

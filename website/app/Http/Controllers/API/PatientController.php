@@ -4,24 +4,29 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
-class AppointmentController extends Controller
+use App\Models\Patient; 
+use DB; 
+class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = $request->user();
 
-        $appoint = DB::table("appointments")
-        ->where("patient_id", "=", $user->id)
-        ->get()->toArray(); 
+        $patients = DB::table("patients")
+                    ->where("User_id", "=", $user->id)
+                    ->get()->toArray(); 
 
-        return response($appoint, 201);
+        return $patients;
+        //return "hj";
+        $patients = "hi";
 
+
+        return response($patients); 
     }
 
     /**
@@ -44,28 +49,19 @@ class AppointmentController extends Controller
     {
         $user = $request->user();
 
-        $inputs["patient_id"] = $user->id; 
-        $inputs["patient_name"] = $request->patient_name; 
-        $inputs["reason"] = $request->reason; 
-        $inputs["appointment_status"] = 0; 
- 
-        $slots_available = DB::table('slots')
-                                 ->where("Slot_date", "=", "Time_and_Date")
-                                 ->first(); 
-         $inputs["Time_and_Date"] = $request->Time_and_Date; 
-        if($slots_available == NULL)
-        {
-            Appointment::create($inputs); 
-            $appoint = DB::table("appointments")->where([["appointment_status", "=", 0]])
-                ->get()->toArray(); 
-            return view("appointments.index", compact("appoint"))->with("success", "Appointment booked successfully"); 
-        }
- 
- 
-        $appointment = Appointment::create($inputs); 
-        return response($appointment, 201);
+        $patientInfo["User_id"] = $user->id; 
+        $patientInfo["Patient_name"] = $request->Patient_name; 
+        
+        $patientInfo["Patient_dob"] = $request->Patient_dob; 
+        $patientInfo["Patient_gender"] = $request->Patient_gender; 
+        $patientInfo["Secret_key"] = mt_rand(100000, 999999); 
 
+        $response = [
+            "patient_data" => Patient::create($patientInfo), 
+            "message" => "success"
+            ]; 
 
+        return response($response, 201);     
     }
 
     /**
@@ -76,10 +72,7 @@ class AppointmentController extends Controller
      */
     public function show($id)
     {
-        $appointment->appointment_status = 1; 
-        $appointment->save(); 
-        $appointment = "Success"; 
-        return response($appointment, 201);
+        //
     }
 
     /**
@@ -113,9 +106,6 @@ class AppointmentController extends Controller
      */
     public function destroy($id)
     {
-        $appointment->appointment_status = 3; 
-        $appointment->save(); 
-
-        return response(201);
+        //
     }
 }

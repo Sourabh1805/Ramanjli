@@ -7,6 +7,8 @@ use App\Http\Controllers\ApiAppointmentsController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\A_PrescriptionController;
 use App\Http\Controllers\A_MedicineReminderController;
+use App\Http\Controllers\API\PatientController;
+use App\Http\Controllers\API\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,9 +23,11 @@ use App\Http\Controllers\A_MedicineReminderController;
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::POST('bookappointment/create', [ApiAppointmentsController::class, 'store']);
     Route::POST('myappointment', [ApiAppointmentsController::class, 'index']);
+    Route::POST('patient', [PatientController::class, 'index']);
+    Route::POST('patient/create', [PatientController::class, 'store']);
 });
 
-Route::POST('loginapi', [API_Auth_Controller::class, 'login']);
+Route::POST('loginapi', [AuthController::class, 'login']);
 Route::POST('registration', [API_Auth_Controller::class, 'registration']);
 Route::POST('profile', [API_Auth_Controller::class, 'profile']);
 

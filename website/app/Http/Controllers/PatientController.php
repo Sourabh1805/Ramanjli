@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Auth;
+use DB; 
 class PatientController extends Controller
 {
     //
@@ -15,9 +16,15 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::latest()->paginate(5);
-        return view('patients.index',compact('patients'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        $user = Auth::user(); 
+        if($user->hasRole("Doctor"))
+        {
+            $patients = DB::table("patients")
+            ->join("users", "users.id", "patients.User_id")
+            ->get()->toArray(); 
+            return view('patients.index',compact('patients'));
+        }
+        return back(); 
     }
     /**
      * Show the form for creating a new resource.

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     
     function login(Request $request) {
-        
+       // return "hi";
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -43,7 +43,7 @@ class AuthController extends Controller
         $request->validate([
             "name" => "required", 
             'email' => 'required|email', //|unique: users',
-           // 'Phonenumber'=>'required',//|unique: users',
+            'mobile_no'=>'required',//|unique: users',
             'password' => 'required ', 
         ]);
         // return $request;

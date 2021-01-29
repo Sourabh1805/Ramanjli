@@ -8,7 +8,7 @@
                 <h2>Patients</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('patients.create') }}"> Create Patient</a>
+                <a class="btn btn-success" href="{{ route('patients.create') }}"> Register Patient</a>
             </div>
         </div>
     </div>
@@ -21,20 +21,22 @@
     @endif
 
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <tr>
             <th>No</th>
             <th>Name</th>
-            <th>User id</th>
+            <th>Parent name</th>
             <th>DOB</th>
             <th>Gender</th>
             <th width="280px">Action</th>
         </tr>
+        <?php $i = 1; ?>
 	    @foreach ($patients as $patient)
 	    <tr>
-	        <td>{{ ++$i }}</td>
+        <td> {{$i}} </td>
+        <?php $i = $i + 1 ?>
 	        <td>{{ $patient->Patient_name }}</td>
-	        <td>{{ $patient->User_id }}</td>
+	        <td>{{ $patient->name }}</td>
             <td>{{ $patient->Patient_dob }}</td>
 	        <td>{{ $patient->Patient_gender }}</td>
             <td>
@@ -48,5 +50,4 @@
 	    </tr>
 	    @endforeach
     </table>
-    {!! $patients->links() !!}
 @endsection

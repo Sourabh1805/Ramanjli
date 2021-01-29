@@ -33,6 +33,7 @@ Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::resource('patients', PatientController::class);
 Route::group(['middleware' => ['auth']], function() {
     Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

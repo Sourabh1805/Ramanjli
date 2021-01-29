@@ -10,7 +10,7 @@ import InputsStyles from '../styles/InputsStyles';
 import { COLORS, SIZES, FONTS } from "../constants";
 import { Logoheader } from "../components";
 import { emailValidator,passwordValidator } from "../validation/Validation";
-import { authServices } from "../src/services/authServices";
+import { login } from "../src/services/authServices";
 
 const LoginScreen = props => {
     const [Email, setEmail] = useState({ value: '', error: '' })
@@ -21,11 +21,11 @@ const LoginScreen = props => {
         const passwordError = passwordValidator(text)
     
         if (passwordError) {
-            setPassword({ ...Password, error: passwordError })
+            setPassword({ value:text, error: passwordError })
             return
         }
         else  {
-            setPassword({ ...Password, error: "" })
+            setPassword({ value:text, error: "" })
             return
         }
     }
@@ -33,21 +33,25 @@ const LoginScreen = props => {
     const ValidateEmail = (text) =>{
         const emailError = emailValidator(text)
         if (emailError) {
-            setEmail({ ...Email, error: emailError })
+            setEmail({ value:text, error: emailError })
             return
         }
         else{
-            setEmail({ ...Email, error: "" })
+            setEmail({ value:text, error: "" })
             return
         }
     }
 
-  const login= ()=>{
+  const login2= ()=>{
         data={
-            Email: Email,
-            Password:Password
+            Email: Email.value,
+            Password:Password.value
         }
-        authServices.login(data)
+        const flag = login(data)
+        console.log(flag)
+        if(flag=="200"){
+            navigation.replace("HomeScreen")
+        }
 
     }
 
@@ -103,7 +107,7 @@ const LoginScreen = props => {
                     <Text style={[styles.textBody], {alignSelf: 'flex-end',color:COLORS.white}}>Forgot Password?</Text>
                 </View>
 
-                <TouchableOpacity style={Submitstyles.container} onPress={login}>
+                <TouchableOpacity style={Submitstyles.container} onPress={login2}>
                     <Text style={Submitstyles.submitText}> Log In </Text>
                 </TouchableOpacity>
                 <View style={{flexDirection: 'row', marginVertical: 5}}>

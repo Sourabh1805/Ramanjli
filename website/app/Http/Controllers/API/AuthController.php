@@ -7,20 +7,31 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Validator;
 
 class AuthController extends Controller
 {
     
     function login(Request $request) {
         
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-            'device_name' => 'required',
+        
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email', 
+            'password' => 'required', 
+            'device_name' =>'required'
+           
         ]);
     
+        if ($validator->fails()) {
+            
+            $responseArr['message'] = $validator->errors();;
+            return response()->json($responseArr, 400);
+        }
+
+
         $user = User::where('email', $request->email)->first();
-    
+
+        
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],

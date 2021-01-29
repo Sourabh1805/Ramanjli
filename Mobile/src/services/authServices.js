@@ -1,12 +1,14 @@
-import {config} from "../lib/config";
+import { appConstants } from "../../constants";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function login(data) {
     try{
-         fetch(config.ClientUrL+"/loginapi", {
+        console.log("login")
+        console.log(data)
+        console.log("login")
+         fetch(appConstants.ClientUrL+"/loginapi", {
             method: 'POST', 
             mode: "no-cors", 
-
 
             headers: {
                 'Accept': 'application/json', 
@@ -19,20 +21,27 @@ export function login(data) {
                 "device_name": "react-app", 
             })
         }).then(res=>res.json()).then(resData => {
+            if(resData['errors']){
+                console.log("return")
+                console.log(resData['errors'])
+                return resData['errors']
+            }
             if(resData['code'] == 200)
             {
                 
-            try {
-                     AsyncStorage.setItem('userToken',resData['token'] )
-                    console.log("sucess login")
-                } catch (e) {
-                     
-            }
-                  
+                try {
+                        AsyncStorage.setItem('userToken',resData['token'] )
+                        console.log("sucess login")
+                        return resData['code']
+                    } catch (e) {
+                        
+                }
+            
                 
             }
                 
             })
+           
             
         } 
         catch(error)

@@ -21,6 +21,8 @@ class CreateSlotsTable extends Migration
             $table->timestamp('Slot_date');
             $table->string('Slot_is_available')->default("0");
             $table->string('Slot_max_appointment_count_change')->default(0);
+            $table->string('Slot_is_available_homevisit')->default("0");
+            $table->string('Slot_max_appointment_count_change_homevisit')->default(0);
             $table->timestamps();
         });
     }

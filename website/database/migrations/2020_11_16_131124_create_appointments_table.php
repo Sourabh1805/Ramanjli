@@ -20,13 +20,12 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->bigIncrements("Appointment_id");
-            $table->string('patient_id');
-            $table->string('patient_name');
-            $table->string('reason');
-            $table->date('Time_and_Date')->nullable();
-            $table->date('book_date')->nullable();
-            $table->string('appointment_status');
-
+            $table->string('Appointment_patient_id');
+            $table->string('Appointment_reason');
+            $table->date('Appointment_date')->nullable();
+            $table->string('Appointment_charges')->default(0);
+            $table->string('Appointment_status')->default(1);
+            $table->string('Appointment_isPaymentComplete')->default(0);
             $table->timestamps();
         });
     }

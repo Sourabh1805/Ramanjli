@@ -15,5 +15,7 @@ class Slots extends Model
         'Slot_date',
         'Slot_is_available',
         'Slot_max_appointment_count_change',
+        'Slot_is_available_homevisit',
+        'Slot_max_appointment_count_change_homevisit'
     ];
 }

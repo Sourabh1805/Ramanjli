@@ -29,9 +29,13 @@ class Doctor extends Model
         'Doctor_specialization', 
         'Doctor_address', 
         'Doctor_contact_number', 
-        'Doctor_maximum_number_of_appointments', 
+        'Doctor_clinic_max_appointments', 
         'Doctor_clinic_time_from', 
         'Doctor_clinic_time_to', 
-        'Doctor_holiday', 
+        'Doctor_clinic_holiday', 
+        'Doctor_homevisit_max_appointments', 
+        'Doctor_homevisit_time_from', 
+        'Doctor_homevisit_time_to', 
+        'Doctor_homevisit_holiday',
     ];
 }

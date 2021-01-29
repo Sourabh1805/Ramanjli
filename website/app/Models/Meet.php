@@ -12,11 +12,15 @@ class Meet extends Model
     protected $primaryKey = "Meet_id"; 
 
     protected $fillable = [
-        'appointment_id',
+        'Meet_appointment_id',
         'Meet_treatment',
         'Meet_date', 
         'Meet_note', 
         'Meet_charges',
-        'Meet_documents'
+        'Meet_isPaid',
+        'Meet_isHomeVisit', 
+        'Meet_isAdvancePaid', 
+        'Meet_status',
+        
     ];
 }

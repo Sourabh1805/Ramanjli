@@ -56,7 +56,7 @@
     @endif
     </td>
 <td>
-{{$user->Time_and_Date}}
+{{$user->Appointment_date}}
 </td>
 
 

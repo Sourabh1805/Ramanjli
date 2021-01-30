@@ -40,7 +40,7 @@ class AppointmentController extends Controller
             $appoint = DB::table("appointments")
                 ->where([["appointment_status", '!=', 1], 
                 ["appointment_status", '!=', 4]])
-                ->orderBy("Time_and_Date")
+                ->orderBy("Appointment_date")
                 ->get()->toArray(); 
 
             if($appoint == NULL)
@@ -81,16 +81,16 @@ class AppointmentController extends Controller
         $this->validate($request, [
             "Patient_username" => "required", 
             "reason" => "required", 
-            "Time_and_Date" => "required"
+            "Appointment_date" => "required"
         ]); 
         //Logged in user information
         $user = Auth::user(); 
          
         $doctor = Doctor::first();
-         //return $request->Time_and_Date; 
+         //return $request->Appointment_date; 
 
         $onleave = DB::table("slots")->where([
-                ["Slot_date", "=", $request->Time_and_Date], 
+                ["Slot_date", "=", $request->Appointment_date], 
                 ["Slot_is_available", "=", "NO"]])->get()->toArray();
 
         if($onleave != NULL)
@@ -102,7 +102,7 @@ class AppointmentController extends Controller
                                     ->where([['appointment_status', '=', 0]])
                                     ->count(); 
                 $hasMoreAppointmentstoday = DB::table("slots")->where([
-                    ["Slot_date", "=", $request->Time_and_Date], 
+                    ["Slot_date", "=", $request->Appointment_date], 
                     ["Slot_is_available", "=", 0]])->get()->toArray();
                 if($Appointments <= $doctor["Doctor_maximum_number_of_appointments"])
                 {
@@ -110,7 +110,7 @@ class AppointmentController extends Controller
                     $inputs["patient_name"] = $request->Patient_username; 
                     $inputs["reason"] = $request->reason; 
                     $inputs["appointment_status"] = 0; 
-                    $inputs["Time_and_Date"] = $request->Time_and_Date; 
+                    $inputs["Appointment_date"] = $request->Appointment_date; 
                     Appointment::create($inputs); 
                     return view('appointments.success') ; 
                 }
@@ -183,7 +183,7 @@ class AppointmentController extends Controller
     public function today()
     { 
         $dt = Carbon::now()->toDateString();
-        $appoint = Appointment::where([['Time_and_Date', '=', $dt], ['appointment_status', '=', 1]])->get(); 
+        $appoint = Appointment::where([['Appointment_date', '=', $dt], ['appointment_status', '=', 1]])->get(); 
         $title = "All Today's Appointment"; 
 
         return view("todaysappointment", compact("appoint", "title")); 

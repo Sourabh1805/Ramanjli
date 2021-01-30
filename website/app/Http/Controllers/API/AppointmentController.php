@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Appointment;
+use App\Models\Meet;
+use DB;
 class AppointmentController extends Controller
 {
     /**
@@ -12,12 +15,12 @@ class AppointmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = $request->user();
 
         $appoint = DB::table("appointments")
-        ->where("patient_id", "=", $user->id)
+        ->where("Appointment_patient_id", "=", $user->id)
         ->get()->toArray(); 
 
         return response($appoint, 201);
@@ -44,28 +47,35 @@ class AppointmentController extends Controller
     {
         $user = $request->user();
 
-        $inputs["patient_id"] = $user->id; 
-        $inputs["Patient_username"] = $request->Patient_username; 
-        $inputs["reason"] = $request->reason; 
+        $inputs["Appointment_patient_id"] = $user->id; 
+        $inputs["Appointment_reason"] = $request->Appointment_reason; 
+        $inputs["Appointment_date"] = $request->Appointment_date;
+
+        $inputs["Appointment_charges"] = $request->Appointment_charges; 
+        $inputs["Appointment_isPaymentComplete"] = $request->Appointment_isPaymentComplete; 
         $inputs["appointment_status"] = 0; 
  
         $slots_available = DB::table('slots')
-                                 ->where("Slot_date", "=", "Time_and_Date")
+                                 ->where("Slot_date", "=", "Appointment_date")
                                  ->first(); 
-         $inputs["Time_and_Date"] = $request->Time_and_Date; 
+         $inputs["Appointment_date"] = $request->Appointment_date; 
         if($slots_available == NULL)
         {
-            Appointment::create($inputs); 
-            $appoint = DB::table("appointments")->where([["appointment_status", "=", 0]])
-                ->get()->toArray(); 
-            return view("appointments.index", compact("appoint"))->with("success", "Appointment booked successfully"); 
+            $appoint = Appointment::create($inputs); 
+            $meetInfo = [
+                "appointment_id" => $appoint->Appointment_id, 
+                "Meet_date" => $appoint->Appointment_date, 
+                "Meet_charges" => $inputs["Appointment_charges"]
+            ]; 
+            $meet = Meet::create($meetInfo); 
+            return response($appoint, 200);
         }
- 
- 
-        $appointment = Appointment::create($inputs); 
-        return response($appointment, 201);
+        
+        $response = [
+            "message" => "Slots are not available"
+        ]; 
 
-
+        return response($response, 201); 
     }
 
     /**

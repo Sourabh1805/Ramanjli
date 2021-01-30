@@ -47,12 +47,12 @@ class PatientController extends Controller
     {
         $user = $request->user();
 
-        $patientInfo["User_id"] = $user->id; 
+        $patientInfo["Patient_user_id"] = $user->id; 
         $patientInfo["Patient_username"] = $request->Patient_username; 
         
         $patientInfo["Patient_dob"] = $request->Patient_dob; 
         $patientInfo["Patient_gender"] = $request->Patient_gender; 
-        $patientInfo["Secret_key"] = mt_rand(100000, 999999); 
+        $patientInfo["Patient_secret_key"] = mt_rand(100000, 999999); 
 
         $response = [
             "patient_data" => Patient::create($patientInfo), 

@@ -45,7 +45,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Date:</strong>
-            <input type="date" name="Time_and_Date" value="{{$appointment->Time_and_Date}}" class="form-control">
+            <input type="date" name="Appointment_date" value="{{$appointment->Appointment_date}}" class="form-control">
         </div>
     </div>
    

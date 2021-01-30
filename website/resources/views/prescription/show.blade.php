@@ -32,7 +32,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
         <br>
-        Appointment Date: {{$Appointment[0]->Time_and_Date}}
+        Appointment Date: {{$Appointment[0]->Appointment_date}}
         <br>
         <table class="table table-bordered" width="100%" cellspacing="0">
 

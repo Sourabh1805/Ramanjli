@@ -20,7 +20,7 @@ class CreatePrescriptionsTable extends Migration
     {
         Schema::create('prescriptions', function (Blueprint $table) {
             $table->bigIncrements("Prescription_id");
-            $table->string('Appointment_id');
+            $table->string('Meet_id');
             $table->string('Medicine_Type');
             $table->string('Medicine_name', "512");
             $table->string('Medicine_quantity');

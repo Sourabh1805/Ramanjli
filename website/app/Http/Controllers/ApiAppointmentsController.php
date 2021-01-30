@@ -50,7 +50,7 @@ class ApiAppointmentsController extends Controller
         $this->validate($request, [
             "Patient_username" => "required",
             "reason" => "required",
-            "Time_and_Date" => "required"
+            "Appointment_date" => "required"
         ]);
 
         $user = $request->user();
@@ -58,16 +58,16 @@ class ApiAppointmentsController extends Controller
       //  $doctor = Doctor::first();
 
         $available = DB::table("slots")->where([
-                ["Slot_date", "=", $request->Time_and_Date],
+                ["Slot_date", "=", $request->Appointment_date],
                 ["Slot_is_available", "=", "0"]])->get()->toArray();
         if($available == NULL)
             {
                 $Appointments = DB::table('appointments')
                                     ->where([
-                                    ["Time_and_Date", '=', $request->Time_and_Date]])
+                                    ["Appointment_date", '=', $request->Appointment_date]])
                                     ->count();
                 $hasMoreAppointmentstoday = DB::table("slots")->where([
-                    ["Slot_date", "=", $request->Time_and_Date],
+                    ["Slot_date", "=", $request->Appointment_date],
                     ["Slot_is_available", "=", 0]])->get()->toArray();
                 if($Appointments <= 2)
                 {
@@ -75,7 +75,7 @@ class ApiAppointmentsController extends Controller
                     $inputs["Patient_username"] = $request->Patient_username;
                     $inputs["reason"] = $request->reason;
                     $inputs["appointment_status"] = 0;
-                    $inputs["Time_and_Date"] = $request->Time_and_Date;
+                    $inputs["Appointment_date"] = $request->Appointment_date;
                     $appoint = Appointment::create($inputs);
                     $response = [
                         'message' => "success",

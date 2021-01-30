@@ -33,7 +33,7 @@
     <td>{{ ++$i }}</td>
     <td>{{ $a->Patient_username }}</td>
     <td>{{ $a->reason }}</td>
-    <td>{{ $a->Time_and_Date }}</td>
+    <td>{{ $a->Appointment_date }}</td>
     <td>
     @if($a->appointment_status == 0)
     Booked by Patient

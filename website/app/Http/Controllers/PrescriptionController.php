@@ -140,7 +140,7 @@ class PrescriptionController extends Controller
         // $Appointment["Patient_username"] = $Appointment_Record[0]->Patient_username; 
         // $Appointment["reason"] = $Appointment_Record[0]->reason; 
         // $Appointment["appointment_status"] = $Appointment_Record[0]->appointment_status; 
-        // $Appointment["Time_and_Date"] = $Appointment_Record[0]->Time_and_Date; 
+        // $Appointment["Appointment_date"] = $Appointment_Record[0]->Appointment_date; 
         // return $Appointment_Record; 
 
         // for($i=0; $i<count($Appointment_Record[0]->Medicine_name); $i++)

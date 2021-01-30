@@ -23,7 +23,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Date:</strong>
-            {!! Form::date('Time_and_Date', null, array('placeholder' => 'Date','class' => 'form-control')) !!}
+            {!! Form::date('Appointment_date', null, array('placeholder' => 'Date','class' => 'form-control')) !!}
         </div>
     </div>
    

@@ -124,8 +124,6 @@ class PrescriptionController extends Controller
             array_push($prescriptionData, $prescriptionValue); 
         } 
 
-      //   return $Appointment; 
-
      return response($prescriptionData, $Appointment, 200);
 
         //

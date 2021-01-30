@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Add Owner</h2>
+                <h2>Register new Patient</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('patients.index') }}"> Back</a>
@@ -32,7 +32,7 @@
 		    <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Name:</strong>
-		            <input type="text" name="Patient_name" class="form-control" placeholder="Name">
+		            <input type="text" name="Patient_username" class="form-control" placeholder="Name">
 		        </div>
 		    </div>
             <div class="col-xs-12 col-sm-12 col-md-12 ">
@@ -49,10 +49,10 @@
 		    </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
-                    <strong>User Id:</strong>
-                    <select name="User_id" class="form-control">
+                    <strong>Parent name:</strong>
+                    <select name="Patient_user_id" class="form-control">
                         @foreach($users as $user)
-                        <option value="{{$user->name}}">{{$user->name}}</option>
+                        <option value="{{$user->id}}">{{$user->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -60,7 +60,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
 		        <div class="form-group">
 		            <strong>Key:</strong>
-		            <input type="text" name="Secret_key" class="form-control" placeholder="Key">
+		            <input type="text" name="Patient_secret_key" class="form-control" placeholder="Key">
 		        </div>
 		    </div>
             

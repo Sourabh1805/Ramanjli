@@ -20,11 +20,11 @@ class PatientController extends Controller
         if($user->hasRole("Doctor"))
         {
             $patients = DB::table("patients")
-            ->join("users", "users.id", "patients.User_id")
+            ->join("users", "users.id", "patients.Patient_user_id")
             ->get()->toArray(); 
             return view('patients.index',compact('patients'));
         }
-        return back(); 
+        return back()->with("error", "You are not permitted to access this area"); 
     }
     /**
      * Show the form for creating a new resource.
@@ -33,7 +33,6 @@ class PatientController extends Controller
      */
     public function create()
     {
-        
         $users = User::all();
         return view('patients.create',compact('users'));
     }
@@ -46,15 +45,20 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'Patient_name' => 'required',
-            'User_id' => 'required',
+        $this->validate($request, [
+            'Patient_username' => 'required',
+            'Patient_user_id' => 'required',
             'Patient_dob' => 'required',
             'Patient_gender' => 'required',
-            'Secret_key' => 'required',
+            'Patient_secret_key' => 'required',
         ]);
-    
-        Patient::create($request->all());
+
+        $inputs = $request->all(); 
+
+
+        // return $request; 
+        
+        Patient::create($inputs);
     
 
         return redirect()->route('patients.index')
@@ -68,6 +72,16 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
+        //return $patient; 
+        $history = DB::table("appointments")
+                        ->where("patient_id", "=", $patient->Patient_id)
+                        ->get()->toArray(); 
+        if($history == NULL) 
+        {
+            $history["message"] = "No appointments booked till today!"; 
+        }
+
+        return $patient; 
         return view('patients.show',compact('patient'));
     }
 
@@ -79,9 +93,10 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        return view('patients.edit',compact('patient'));
+        $user = DB::table("users")->where("id", '=', $patient->User_id)->get()->toArray();
+        return view('patients.edit',compact('patient', 'user'));
     }
-    
+     
     /**
      * Update the specified resource in storage.
      *
@@ -91,8 +106,8 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-         request()->validate([
-            'Patient_name' => 'required',
+         $this->validate($request, [
+            'Patient_username' => 'required',
             'User_id' => 'required',
             'Patient_dob' => 'required',
             'Patient_gender' => 'required',
@@ -100,9 +115,8 @@ class PatientController extends Controller
         ]);
     
         $patient->update($request->all());
-    
-        return redirect()->route('patients.index')
-                        ->with('success','Patient updated successfully');
+        return "hi"; 
+        return redirect('patients'); 
     }
 
 

@@ -38,7 +38,7 @@
  @foreach ($appoint as $key => $user)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $user->patient_name }}</td>
+    <td>{{ $user->Patient_username }}</td>
     <td>{{ $user->reason }}</td>
     <td>
     @if($user->appointment_status == 0)

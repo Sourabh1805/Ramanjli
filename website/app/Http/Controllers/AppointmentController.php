@@ -79,7 +79,7 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "patient_name" => "required", 
+            "Patient_username" => "required", 
             "reason" => "required", 
             "Time_and_Date" => "required"
         ]); 
@@ -107,7 +107,7 @@ class AppointmentController extends Controller
                 if($Appointments <= $doctor["Doctor_maximum_number_of_appointments"])
                 {
                     $inputs["patient_id"] = $user->id; 
-                    $inputs["patient_name"] = $request->patient_name; 
+                    $inputs["patient_name"] = $request->Patient_username; 
                     $inputs["reason"] = $request->reason; 
                     $inputs["appointment_status"] = 0; 
                     $inputs["Time_and_Date"] = $request->Time_and_Date; 

@@ -45,7 +45,7 @@ class AppointmentController extends Controller
         $user = $request->user();
 
         $inputs["patient_id"] = $user->id; 
-        $inputs["patient_name"] = $request->patient_name; 
+        $inputs["Patient_username"] = $request->Patient_username; 
         $inputs["reason"] = $request->reason; 
         $inputs["appointment_status"] = 0; 
  

@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Prescription for :: {{$Appointment[0]->patient_name}}</h2>
+            <h2>Prescription for :: {{$Appointment[0]->Patient_username}}</h2>
         </div>
         <div class="pull-right">
         <a class="btn btn-primary" href="{{ route('appointments.index') }}"> Back</a>

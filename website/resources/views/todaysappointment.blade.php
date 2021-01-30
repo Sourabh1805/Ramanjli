@@ -30,7 +30,7 @@
  @foreach ($appoint as $key => $a)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $a->patient_name }}</td>
+    <td>{{ $a->Patient_username }}</td>
     <td>{{ $a->reason }}</td>
     <td>   
 

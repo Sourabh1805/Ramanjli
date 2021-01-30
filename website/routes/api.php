@@ -28,8 +28,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 });
 
 Route::POST('loginapi', [AuthController::class, 'login']);
-Route::POST('registration', [API_Auth_Controller::class, 'registration']);
-Route::POST('profile', [API_Auth_Controller::class, 'profile']);
+Route::POST('registration', [AuthController::class, 'registration']);
+Route::POST('profile', [AuthController::class, 'profile']);
 
 Route::POST('advertisement', [AdvertisementController::class, 'index']);
 Route::POST('advertisement/create', [AdvertisementController::class, 'store']);

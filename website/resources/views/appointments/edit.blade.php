@@ -32,7 +32,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Name of Patient:</strong>
-            <input type="text" name="patient_name" value="{{$appointment->patient_name}}" class="form-control" readonly>
+            <input type="text" name="Patient_username" value="{{$appointment->Patient_username}}" class="form-control" readonly>
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">

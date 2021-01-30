@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Prescription;
-use App\Models\Appointment;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB; 
+
 class PrescriptionController extends Controller
 {
     /**
@@ -13,10 +12,6 @@ class PrescriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
         //
@@ -29,6 +24,7 @@ class PrescriptionController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -86,13 +82,13 @@ class PrescriptionController extends Controller
         $prescription = Prescription::create($ok);
 
        // return $prescriptionData[0];//["Medicine_Type"]; 
-        return view("prescription.view", compact("prescriptionData", "Appointment"));
+        return response($prescriptionData, $Appointment, 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Prescription  $prescription
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($Appointment_id)
@@ -130,57 +126,31 @@ class PrescriptionController extends Controller
 
       //   return $Appointment; 
 
-     return view("prescription.show", compact("prescriptionData", "Appointment"));
+     return response($prescriptionData, $Appointment, 200);
 
-
-        // $Appointment = [];
-        // $string = $Appointment_Record[0]->Medicine_name; 
-        // $Appointment_Record[0]->Medicine_name = explode(',', $string);
-        // $Appointment["Appointment_id"] = $Appointment_Record[0]->Appointment_id; 
-        // $Appointment["Patient_username"] = $Appointment_Record[0]->Patient_username; 
-        // $Appointment["reason"] = $Appointment_Record[0]->reason; 
-        // $Appointment["appointment_status"] = $Appointment_Record[0]->appointment_status; 
-        // $Appointment["Time_and_Date"] = $Appointment_Record[0]->Time_and_Date; 
-        // return $Appointment_Record; 
-
-        // for($i=0; $i<count($Appointment_Record[0]->Medicine_name); $i++)
-        // {
-        //     $prescriptionValue = []; 
-        //     $Appointment_Record[0]->Medicine_Type = $Appointment_Record["Medicine_Type"][$i];
-        //     $prescriptionValue["Medicine_name"] = $Appointment_Record["Medicine_name"][$i];
-        //     $prescriptionValue["Medicine_quantity"] = $Appointment_Record["Medicine_quantity"][$i];
-        //     $prescriptionValue["morning"] = $Appointment_Record["morning"][$i];
-        //     $prescriptionValue["afternoon"] = $Appointment_Record["afternoon"][$i];
-        //     $prescriptionValue["night"] = $Appointment_Record["night"][$i];
-        //     array_push($Appointment, $prescriptionValue);            
-        // }
-        // return $Appointment_Record; 
-
-        // return "ok"; 
-        
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Prescription  $prescription
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($Appointment_id)
     {
         $Appointment = Appointment::find($Appointment_id); 
-        return view("prescription.create", compact('Appointment')); 
+        return response($Appointment, 200); 
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Prescription  $prescription
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prescription $prescription)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -188,10 +158,10 @@ class PrescriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Prescription  $prescription
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Prescription $prescription)
+    public function destroy($id)
     {
         //
     }

@@ -20,13 +20,11 @@ class PatientController extends Controller
         $patients = DB::table("patients")
                     ->where("User_id", "=", $user->id)
                     ->get()->toArray(); 
-
-        return $patients;
-        //return "hj";
-        $patients = "hi";
-
-
-        return response($patients); 
+        $response = [
+            "patient_data" => $patients, 
+            "message" => "success"
+            ]; 
+        return response($response, 200); 
     }
 
     /**
@@ -50,7 +48,7 @@ class PatientController extends Controller
         $user = $request->user();
 
         $patientInfo["User_id"] = $user->id; 
-        $patientInfo["Patient_name"] = $request->Patient_name; 
+        $patientInfo["Patient_username"] = $request->Patient_username; 
         
         $patientInfo["Patient_dob"] = $request->Patient_dob; 
         $patientInfo["Patient_gender"] = $request->Patient_gender; 
@@ -61,7 +59,7 @@ class PatientController extends Controller
             "message" => "success"
             ]; 
 
-        return response($response, 201);     
+        return response($response, 200);     
     }
 
     /**
@@ -72,7 +70,8 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        //
+        $patientInfo = Patient::find($id); 
+        return response($response, 200); 
     }
 
     /**
@@ -83,7 +82,8 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $patientInfo = Patient::find($id); 
+        return response($response, 200);
     }
 
     /**
@@ -95,7 +95,22 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(
+            $request, [
+                "Patient_username" => "required", 
+                "Patient_dob" => "required", 
+                "Patient_gender" => "required", 
+                "Patient_secret_key" => "required", 
+            ]
+            ); 
+
+        $patientInfo = Patient::find($id);
+        $patientInfo->Patient_username = $request->Patient_username; 
+        $patientInfo->Patient_dob = $request->Patient_dob; 
+        $patientInfo->Patient_gender = $request->Patient_gender; 
+        $patientInfo->Patient_secret_key = $request->Patient_secret_key; 
+        $patientInfo->save(); 
+        return response($response, 200);
     }
 
     /**

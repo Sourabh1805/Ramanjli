@@ -48,7 +48,7 @@ class ApiAppointmentsController extends Controller
     {
 
         $this->validate($request, [
-            "patient_name" => "required",
+            "Patient_username" => "required",
             "reason" => "required",
             "Time_and_Date" => "required"
         ]);
@@ -72,7 +72,7 @@ class ApiAppointmentsController extends Controller
                 if($Appointments <= 2)
                 {
                     $inputs["patient_id"] = $user->id;
-                    $inputs["patient_name"] = $request->patient_name;
+                    $inputs["Patient_username"] = $request->Patient_username;
                     $inputs["reason"] = $request->reason;
                     $inputs["appointment_status"] = 0;
                     $inputs["Time_and_Date"] = $request->Time_and_Date;

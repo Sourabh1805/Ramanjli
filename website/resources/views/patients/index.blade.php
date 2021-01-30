@@ -35,7 +35,7 @@
 	    <tr>
         <td> {{$i}} </td>
         <?php $i = $i + 1 ?>
-	        <td>{{ $patient->Patient_name }}</td>
+	        <td>{{ $patient->Patient_username }}</td>
 	        <td>{{ $patient->name }}</td>
             <td>{{ $patient->Patient_dob }}</td>
 	        <td>{{ $patient->Patient_gender }}</td>

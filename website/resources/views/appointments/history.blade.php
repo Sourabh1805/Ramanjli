@@ -24,7 +24,7 @@
    <th>No</th>
    <th>Patient Name</th>
    <th>Reason</th>
-   <th width="280px">Write Prescription</th>
+   <th width="280px">Show meets</th>
  </tr>
  <?php $i=0 ?>
  @foreach ($appoint as $key => $a)

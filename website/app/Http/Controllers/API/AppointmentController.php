@@ -62,13 +62,8 @@ class AppointmentController extends Controller
         if($slots_available == NULL)
         {
             $appoint = Appointment::create($inputs); 
-            $meetInfo = [
-                "appointment_id" => $appoint->Appointment_id, 
-                "Meet_date" => $appoint->Appointment_date, 
-                "Meet_charges" => $inputs["Appointment_charges"]
-            ]; 
-            $meet = Meet::create($meetInfo); 
             return response($appoint, 200);
+            //send to meet create page from here            
         }
         
         $response = [

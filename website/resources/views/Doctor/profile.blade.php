@@ -50,8 +50,8 @@
 
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Doctor_maximum_number_of_appointments:</strong>
-            {{ $DoctorData->Doctor_maximum_number_of_appointments }}
+            <strong>Doctor_clinic_max_appointments:</strong>
+            {{ $DoctorData->Doctor_clinic_max_appointments }}
         </div>
     </div>
 
@@ -72,7 +72,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Doctor_holiday:</strong>
-            @if($DoctorData->Doctor_holiday == 0)
+            @if($DoctorData->Doctor_clinic_holiday == 0)
             Sunday            @endif
 
             @if($DoctorData->Doctor_holiday == 1)
@@ -98,8 +98,29 @@
 
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Doctor_clinic_time_to:</strong>
-            {{ $DoctorData->Doctor_clinic_time_to }}
+            <strong>Doctor_homevisit_max_appointments:</strong>
+            {{ $DoctorData->Doctor_homevisit_max_appointments }}
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Doctor_homevisit_time_from:</strong>
+            {{ $DoctorData->Doctor_homevisit_time_from }}
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Doctor_homevisit_time_to:</strong>
+            {{ $DoctorData->Doctor_homevisit_time_to }}
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Doctor_homevisit_max_appointments:</strong>
+            {{ $DoctorData->Doctor_homevisit_max_appointments }}
         </div>
     </div>
 

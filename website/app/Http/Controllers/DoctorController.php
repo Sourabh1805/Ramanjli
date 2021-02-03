@@ -57,15 +57,22 @@ class DoctorController extends Controller
             "Doctor_maximum_number_of_appointments" => "required",
             "Doctor_clinic_time_from" => "required",
             "Doctor_clinic_time_to" => "required",
-            "Doctor_holiday" => "required"
+            "Doctor_homevisit_max_appointments" => "required",
+            "Doctor_homevisit_time_from" => "required",
+            "Doctor_homevisit_time_to" => "required",
+            "Doctor_homevisit_holiday" => "required"
         ]);
 
         $inputs = $request->all();
-        $inputs['Doctor_maximum_number_of_appointments'] = $inputs['Doctor_maximum_number_of_appointments'];
-        $inputs['Doctor_holiday'] = $inputs['Doctor_holiday'][0];
+        $user = Auth::user(); 
+        $inputs["Doctor_user_id"] = $user->id;
+        $inputs['Doctor_clinic_max_appointments'] = $inputs['Doctor_maximum_number_of_appointments'];
+        $inputs['Doctor_clinic_holiday'] = $inputs['Doctor_homevisit_holiday'][0];
+        
         $Doctor = Doctor::first();
         if($Doctor == NULL)
         {
+             
             $DoctorData = Doctor::create($inputs);
             if($DoctorData)
             {

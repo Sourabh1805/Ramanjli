@@ -24,17 +24,21 @@
    <th>No</th>
    <th>Patient Name</th>
    <th>Reason</th>
-   <th width="280px">Write Prescription</th>
+   <th width="280px">Show meets</th>
  </tr>
  <?php $i=0 ?>
  @foreach ($appoint as $key => $a)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $a->Patient_username }}</td>
-    <td>{{ $a->reason }}</td>
+    <?php 
+    $user = DB::table("users")->where("id", "=", $a->Appointment_patient_id)
+    ->get()->toArray(); 
+    ?>
+    <td>{{ $user[0]->name }}</td>
+    <td>{{ $a->Appointment_reason }}</td>
     <td>   
 
-    <a class="btn btn-success" href="{{ route('prescription.edit',$a->Appointment_id) }}">Make Prescription</a>
+    <a class="btn btn-success" href="{{ route('meet.edit',$a->Appointment_id) }}">Show Meets</a>
     </td>
    
   </tr>

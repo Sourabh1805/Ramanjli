@@ -13,6 +13,7 @@ use App\Http\Controllers\PasswordManagementController;
 use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\MeetController;
 
 Route::get('/', function () {
     return view('WELCOME');
@@ -47,6 +48,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('changepassword', [PasswordManagementController::class, 'changepassword'])->name('changepassword');
     Route::resource('passwordmgmt', PasswordManagementController::class);
+    Route::resource('meet', MeetController::class);
     Route::POST('resetpassword', [PasswordManagementController::class, 'resetpassword'])->name('resetpassword');
     Route::get('phpfirebase_sdk', [FirebaseController::class, 'index'])->name('index');
 

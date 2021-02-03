@@ -106,13 +106,14 @@ class AppointmentController extends Controller
                     ["Slot_is_available", "=", 0]])->get()->toArray();
                 if($Appointments <= $doctor["Doctor_maximum_number_of_appointments"])
                 {
-                    $inputs["patient_id"] = $user->id; 
+                    $inputs["Appointment_patient_id"] = $user->id; 
                     $inputs["patient_name"] = $request->Patient_username; 
-                    $inputs["reason"] = $request->reason; 
+                    $inputs["Appointment_reason"] = $request->reason; 
                     $inputs["appointment_status"] = 0; 
                     $inputs["Appointment_date"] = $request->Appointment_date; 
-                    Appointment::create($inputs); 
-                    return view('appointments.success') ; 
+                    $appointment = Appointment::create($inputs); 
+               //     return $appointment; 
+                    return view('meet.create', compact("appointment")) ; 
                 }
                 return "Please book appointment for another date"; 
         
@@ -184,17 +185,16 @@ class AppointmentController extends Controller
     { 
         $dt = Carbon::now()->toDateString();
         $appoint = Appointment::where([['Appointment_date', '=', $dt], ['appointment_status', '=', 1]])->get(); 
-        $title = "All Today's Appointment"; 
-
+        $title = "All Today's Appointment";
         return view("todaysappointment", compact("appoint", "title")); 
     }
 
     public function history() 
     {
         $appoint = DB::table("appointments")
-        ->join("prescriptions", "prescriptions.Appointment_id", "=", "appointments.Appointment_id")
+        ->join("meets", "meets.Meet_appointment_id", "=", "appointments.Appointment_id")
         ->get()->toArray(); 
-       // return $appoint; 
+        return $appoint; 
         return view("appointments.history", compact("appoint")); 
     }
     public function all() 

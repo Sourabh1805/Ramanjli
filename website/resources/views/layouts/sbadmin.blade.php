@@ -51,6 +51,11 @@
                                 Patients
                             </a>
 
+                            <a class="nav-link" href="{{ route('patients.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Patients
+                            </a>
+
                             <a class="nav-link" href="{{ url('today') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 View Today's Appointments

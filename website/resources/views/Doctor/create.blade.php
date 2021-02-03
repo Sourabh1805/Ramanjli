@@ -69,7 +69,7 @@
         <input type="number" class="form-control" name="Doctor_maximum_number_of_appointments">
         </div>
         </div>
-
+        
         <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
         <strong>Clinic timing from and to</strong>
@@ -78,18 +78,41 @@
         <input type="time" class="form-control" name="Doctor_clinic_time_from">
         </div>
         </div>
-
         <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
         <strong>To </strong>
         <input type="time" class="form-control" name="Doctor_clinic_time_to">
         </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+        <strong>Maximum number of Home Visits in a day? </strong>
+        <input type="number" class="form-control" name="Doctor_homevisit_max_appointments">
+        </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+        <strong>Home Visits timing from and to</strong>
+        <br>
+        <strong>From</strong>
+        <input type="time" class="form-control" name="Doctor_homevisit_time_from">
+        </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+        <strong>To </strong>
+        <input type="time" class="form-control" name="Doctor_homevisit_time_to">
+        </div>
+        </div>      
+
+        
+
+        
 
         <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
         <strong>Holiday on?:</strong>
-        <select name="Doctor_holiday[]" class="form-control" >
+        <select name="Doctor_homevisit_holiday" class="form-control" >
             <option value="0"> Sunday </option>
             <option value="1"> Monday </option>
             <option value="2"> Tuesday </option>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prescription;
+use App\Models\Meet;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use DB; 
@@ -40,7 +41,7 @@ class PrescriptionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "Appointment_id" => "required", 
+            "Meet_id" => "required", 
             "Medicine_Type" => "required", 
             "Medicine_name" => "required", 
             "Medicine_quantity" => "required", 
@@ -53,7 +54,7 @@ class PrescriptionController extends Controller
        // return gettype($request->Medicine_Type); 
         $inputs = $request->all();
         $prescriptionData = []; 
-
+            return $inputs; 
         for($i=0; $i<count($inputs["Medicine_name"]); $i++)
         {
             $prescriptionValue = []; 
@@ -65,13 +66,13 @@ class PrescriptionController extends Controller
             $prescriptionValue["night"] = $inputs["night"][$i];
             array_push($prescriptionData, $prescriptionValue); 
         }
-        $Appointment = Appointment::find($inputs["Appointment_id"]); 
+        // $Appointment = Meet::find($inputs["Meet_id"]); 
 
-        $Appointment->appointment_status = 4; 
-        $Appointment->save();
+        // $Appointment->appointment_status = 4; 
+        // $Appointment->save();
         
         $ok = array(); 
-        $ok["Appointment_id"] = $inputs['Appointment_id']; 
+        $ok["Meet_id"] = $inputs['Meet_id']; 
         $ok['Medicine_Type'] =  implode(', ', $inputs["Medicine_Type"]);
         $ok['Medicine_name'] =  implode(', ', $inputs["Medicine_name"]);
         $ok['Medicine_quantity'] =  implode(', ', $inputs["Medicine_quantity"]);
@@ -167,9 +168,9 @@ class PrescriptionController extends Controller
      * @param  \App\Models\Prescription  $prescription
      * @return \Illuminate\Http\Response
      */
-    public function edit($Appointment_id)
+    public function edit($Meet_id)
     {
-        $Appointment = Appointment::find($Appointment_id); 
+        $Appointment = Meet::find($Meet_id); 
         return view("prescription.create", compact('Appointment')); 
     }
 

@@ -104,6 +104,7 @@ class PrescriptionController extends Controller
      */
     public function show($Appointment_id)
     {
+        return $Appointment_id; 
         $Appointment = DB::table("appointments")
         ->where([["appointments.Appointment_id", "=", $Appointment_id]])
         ->join("prescriptions", "prescriptions.Appointment_id", "=", "appointments.Appointment_id")

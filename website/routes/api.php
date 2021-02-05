@@ -24,11 +24,11 @@ use App\Http\Controllers\API\AppointmentController;
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::POST('bookappointment/create', [AppointmentController::class, 'store']);
     Route::POST('myappointment', [AppointmentController::class, 'index']);
-    Route::POST('patient', [PatientController::class, 'index']);
+    Route::GET('patient', [PatientController::class, 'index']);
     Route::POST('patient/create', [PatientController::class, 'store']);
         
    // Route::POST('prescription/patient/view', [PrescriptionController::class, 'index']);
-    Route::POST('prescription/patient/show', [A_PrescriptionController::class, 'show']);
+    Route::POST('prescription/patient/show', [PrescriptionController::class, 'show']);
     Route::POST('medicinereminder', [A_MedicineReminderController::class, 'store']);
 
 });

@@ -117,7 +117,7 @@ class AppointmentController extends Controller
                     $inputs["appointment_status"] = 0; 
                     $inputs["Appointment_date"] = $request->Appointment_date; 
                     $appointment = Appointment::create($inputs); 
-               //     return $appointment; 
+                    return $appointment; 
                     return view('meet.create', compact("appointment")) ; 
                 }
                 return "Please book appointment for another date"; 

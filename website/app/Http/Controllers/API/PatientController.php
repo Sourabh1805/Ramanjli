@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Patient; 
-use DB; 
+use App\Models\Patient;
+use DB;
 class PatientController extends Controller
 {
     /**
@@ -19,12 +19,12 @@ class PatientController extends Controller
 
         $patients = DB::table("patients")
                     ->where("User_id", "=", $user->id)
-                    ->get()->toArray(); 
+                    ->get()->toArray();
         $response = [
-            "patient_data" => $patients, 
+            "patient_data" => $patients,
             "message" => "success"
-            ]; 
-        return response($response, 200); 
+            ];
+        return response($response, 200);
     }
 
     /**
@@ -47,19 +47,19 @@ class PatientController extends Controller
     {
         $user = $request->user();
 
-        $patientInfo["Patient_user_id"] = $user->id; 
-        $patientInfo["Patient_username"] = $request->Patient_username; 
-        
-        $patientInfo["Patient_dob"] = $request->Patient_dob; 
-        $patientInfo["Patient_gender"] = $request->Patient_gender; 
-        $patientInfo["Patient_secret_key"] = mt_rand(100000, 999999); 
+        $patientInfo["Patient_user_id"] = $user->id;
+        $patientInfo["Patient_username"] = $request->Patient_username;
+
+        $patientInfo["Patient_dob"] = $request->Patient_dob;
+        $patientInfo["Patient_gender"] = $request->Patient_gender;
+        $patientInfo["Patient_secret_key"] = mt_rand(100000, 999999);
 
         $response = [
-            "patient_data" => Patient::create($patientInfo), 
+            "patient_data" => Patient::create($patientInfo),
             "message" => "success"
-            ]; 
+            ];
 
-        return response($response, 200);     
+        return response($response, 200);
     }
 
     /**
@@ -70,8 +70,8 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        $patientInfo = Patient::find($id); 
-        return response($response, 200); 
+        $patientInfo = Patient::find($id);
+        return response($response, 200);
     }
 
     /**
@@ -82,7 +82,7 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        $patientInfo = Patient::find($id); 
+        $patientInfo = Patient::find($id);
         return response($response, 200);
     }
 
@@ -97,19 +97,19 @@ class PatientController extends Controller
     {
         $this->validate(
             $request, [
-                "Patient_username" => "required", 
-                "Patient_dob" => "required", 
-                "Patient_gender" => "required", 
-                "Patient_secret_key" => "required", 
+                "Patient_username" => "required",
+                "Patient_dob" => "required",
+                "Patient_gender" => "required",
+                "Patient_secret_key" => "required",
             ]
-            ); 
+            );
 
         $patientInfo = Patient::find($id);
-        $patientInfo->Patient_username = $request->Patient_username; 
-        $patientInfo->Patient_dob = $request->Patient_dob; 
-        $patientInfo->Patient_gender = $request->Patient_gender; 
-        $patientInfo->Patient_secret_key = $request->Patient_secret_key; 
-        $patientInfo->save(); 
+        $patientInfo->Patient_username = $request->Patient_username;
+        $patientInfo->Patient_dob = $request->Patient_dob;
+        $patientInfo->Patient_gender = $request->Patient_gender;
+        $patientInfo->Patient_secret_key = $request->Patient_secret_key;
+        $patientInfo->save();
         return response($response, 200);
     }
 

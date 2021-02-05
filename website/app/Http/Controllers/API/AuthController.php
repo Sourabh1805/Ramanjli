@@ -11,19 +11,19 @@ use Validator;
 
 class AuthController extends Controller
 {
-    
+
     function login(Request $request) {
-        
-        
+
+
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email', 
-            'password' => 'required', 
+            'email' => 'required|email',
+            'password' => 'required',
             'device_name' =>'required'
-           
+
         ]);
-    
+
         if ($validator->fails()) {
-            
+
             $responseArr['message'] = $validator->errors();;
             return response()->json($responseArr, 400);
         }
@@ -31,18 +31,18 @@ class AuthController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        
+
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
-    
-       
+
+
         $token = $user->createToken($request->device_name, ['role:list'])->plainTextToken;
         $response = [
             'user' => $user,
-            'token' => $token, 
+            'token' => $token,
             'code' => 200
         ];
 
@@ -50,17 +50,17 @@ class AuthController extends Controller
     }
 
     function registration(Request $request) {
-        
+
         $request->validate([
-            "name" => "required", 
+            "name" => "required",
             'email' => 'required|email', //|unique: users',
             'mobile_no'=>'required',//|unique: users',
-            'password' => 'required ', 
+            'password' => 'required ',
         ]);
         // return $request;
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-    
+
         $user = User::create($input);
 
         $response = [
@@ -75,7 +75,7 @@ class AuthController extends Controller
 
         $user = $request->user();
 
-            if ($user->tokenCan('role:list')) 
+            if ($user->tokenCan('role:list'))
             {
 
             $response = [

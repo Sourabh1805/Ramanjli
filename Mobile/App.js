@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import Navigation from './Navigation';
+import Navigation from './navigation/Navigation';
 
 const App: () => React$Node = () => {
   return (

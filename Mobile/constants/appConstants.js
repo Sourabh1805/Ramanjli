@@ -1,4 +1,4 @@
-const ClientUrL = "http://10.0.2.2:8000/api";
+const ClientUrL = "http://192.168.0.7:8000/api";
 const Doctorname = "Doc_name";
 
 

@@ -51,7 +51,7 @@ class AppointmentController extends Controller
             'Appointment_charges' =>'required', 
             'Appointment_isPaymentComplete' =>'required', 
             'Appointment_date' =>'required', 
-            'appointment_status' =>'required', 
+            'Appointment_status' =>'required', 
         ]);
 
         if ($validator->fails()) {
@@ -67,7 +67,7 @@ class AppointmentController extends Controller
 
         $inputs["Appointment_charges"] = $request->Appointment_charges; 
         $inputs["Appointment_isPaymentComplete"] = $request->Appointment_isPaymentComplete; 
-        $inputs["appointment_status"] = 0; 
+        $inputs["Appointment_status"] = 0; 
  
         $slots_available = DB::table('slots')
                                  ->where("Slot_date", "=", "Appointment_date")
@@ -95,7 +95,7 @@ class AppointmentController extends Controller
      */
     public function show($id)
     {
-        $appointment->appointment_status = 1; 
+        $appointment->Appointment_status = 1; 
         $appointment->save(); 
         $appointment = "Success"; 
         return response($appointment, 201);
@@ -132,7 +132,7 @@ class AppointmentController extends Controller
      */
     public function destroy($id)
     {
-        $appointment->appointment_status = 3; 
+        $appointment->Appointment_status = 3; 
         $appointment->save(); 
 
         return response(201);

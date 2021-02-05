@@ -18,7 +18,7 @@
 @endif
 
 
-<table class="table table-bordered">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
   <tr>
      <th>No</th>
      <th>Name</th>

@@ -7,10 +7,12 @@
             <div class="pull-left">
                 <h2>Meets </h2>
             </div>
-          
         </div>
     </div>
-
+<div>
+<a class="btn btn-success" href="{{ route('meet.show',$Appointment_id) }}">
+            Register for new meet 
+            </a></div>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -43,21 +45,21 @@
 	        <td>{{ $meet->Meet_note }}</td>
 	        <td>{{ $meet->Meet_charges }}</td>
 	        <td>
-                 @if( $meet->Meet_isPaid == 0)
+                 @if( $meet->Meet_isPaid == 1)
                     Yes
                  @else
                     No
                  @endif
             </td>
 	        <td>
-            @if( $meet->Meet_isHomeVisit == 0)
+            @if( $meet->Meet_isHomeVisit == 1)
                     Yes
                  @else
                     No
                  @endif
             </td>
             <td>
-            @if( $meet->Meet_isAdvancePaid == 0)
+            @if( $meet->Meet_isAdvancePaid == 1)
                     Yes
                  @else
                     No

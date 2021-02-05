@@ -31,13 +31,10 @@
   <tr>
     <td>{{ ++$i }}</td>
     <td>{{ $a->Patient_username }}</td>
-    <td>{{ $a->reason }}</td>
+    <td>{{ $a->Appointment_reason }}</td>
     <td>   
-    @if($a->appointment_status == 4)
-    <a class="btn btn-success" href="{{ route('prescription.show',$a->Appointment_id) }}">View Prescription</a>
-    @else
-    <a class="btn btn-success" href="{{ route('prescription.show',$a->Appointment_id) }}">Make Prescription</a>
-    @endif
+    <a class="btn btn-success" href="{{ route('meet.edit',$a->Appointment_id) }}">Show Meets</a>
+
     </td>
    
   </tr>

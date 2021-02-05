@@ -74,7 +74,7 @@ class ApiAppointmentsController extends Controller
                     $inputs["patient_id"] = $user->id;
                     $inputs["Patient_username"] = $request->Patient_username;
                     $inputs["reason"] = $request->reason;
-                    $inputs["appointment_status"] = 0;
+                    $inputs["Appointment_status"] = 0;
                     $inputs["Appointment_date"] = $request->Appointment_date;
                     $appoint = Appointment::create($inputs);
                     $response = [
@@ -102,7 +102,7 @@ class ApiAppointmentsController extends Controller
      */
     public function show($id)
     {
-        $appointment->appointment_status = 1;
+        $appointment->Appointment_status = 1;
         $appointment->save();
         $appointment = "Success";
         return response($appointment, 201);
@@ -139,7 +139,7 @@ class ApiAppointmentsController extends Controller
      */
     public function destroy($id)
     {
-        $appointment->appointment_status = 3;
+        $appointment->Appointment_status = 3;
         $appointment->save();
 
         return response(201);

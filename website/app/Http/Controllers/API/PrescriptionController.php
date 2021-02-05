@@ -74,7 +74,7 @@ class PrescriptionController extends Controller
         }
         $Appointment = Appointment::find($inputs["Appointment_id"]); 
 
-        $Appointment->appointment_status = 4; 
+        $Appointment->Appointment_status = 4; 
         $Appointment->save();
         
         $ok = array(); 

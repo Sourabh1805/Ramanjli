@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-<table class="table table-bordered">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
  <tr>
    <th>No</th>
    <th>Patient Name</th>
@@ -39,17 +39,17 @@
   <tr>
     <td>{{ ++$i }}</td>
     <td>{{ $user->Patient_username }}</td>
-    <td>{{ $user->reason }}</td>
+    <td>{{ $user->Appointment_reason }}</td>
     <td>
-    @if($user->appointment_status == 0)
+    @if($user->Appointment_status == 0)
     Booked by Patient
-    @elseif($user->appointment_status==1)
+    @elseif($user->Appointment_status==1)
     Confirmed by Doctor
-    @elseif($user->appointment_status==2)
+    @elseif($user->Appointment_status==2)
     Confirmed by Patient
-    @elseif($user->appointment_status==3)
+    @elseif($user->Appointment_status==3)
     Rejected by Doctor
-    @elseif($user->appointment_status==4)
+    @elseif($user->Appointment_status==4)
     Appointment completed
     @else
     Unable to load status
@@ -62,7 +62,7 @@
 
     <td>   
 
-    <!-- @if($user->appointment_status==1)
+    <!-- @if($user->Appointment_status==1)
     <a class="btn btn-success" href="{{ route('appointments.edit',$user->Appointment_id) }}">Reschedule this Appointment</a>
     </td>
     <td>

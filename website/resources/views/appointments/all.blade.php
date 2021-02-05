@@ -32,18 +32,18 @@
   <tr>
     <td>{{ ++$i }}</td>
     <td>{{ $a->Patient_username }}</td>
-    <td>{{ $a->reason }}</td>
+    <td>{{ $a->Appointment_reason }}</td>
     <td>{{ $a->Appointment_date }}</td>
     <td>
-    @if($a->appointment_status == 0)
+    @if($a->Appointment_status == 0)
     Booked by Patient
-    @elseif($a->appointment_status==1)
+    @elseif($a->Appointment_status==1)
     Confirmed by Doctor
-    @elseif($a->appointment_status==2)
+    @elseif($a->Appointment_status==2)
     Confirmed by Patient
-    @elseif($a->appointment_status==3)
+    @elseif($a->Appointment_status==3)
     Rejected by Doctor
-    @elseif($a->appointment_status==4)
+    @elseif($a->Appointment_status==4)
     Appointment completed
     @else
     Unable to load status

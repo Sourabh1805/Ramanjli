@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Meet; 
+use App\Models\Appointment; 
 use DB; 
 class MeetController extends Controller
 {
@@ -22,8 +23,9 @@ class MeetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($Appointment_id)
     {
+
         
     }
 
@@ -51,9 +53,11 @@ class MeetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($Appointment_id)
     {
-        //
+        $appointment  = Appointment::find($Appointment_id); 
+        return view("meet/create", compact("appointment")); 
+
     }
 
     /**
@@ -68,8 +72,9 @@ class MeetController extends Controller
                     ->where("Meet_appointment_id", '=', $id)
                   //  ->join("prescriptions", "prescriptions.Meet_id", "meets.Meet_id")
                     ->get()->toArray(); 
+        $Appointment_id = $id; 
 
-        return view("appointments.meet", compact("meetlist")); 
+        return view("appointments.meet", compact("meetlist", "Appointment_id")); 
     }
 
     /**

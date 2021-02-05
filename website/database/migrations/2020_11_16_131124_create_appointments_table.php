@@ -8,7 +8,7 @@ class CreateAppointmentsTable extends Migration
 {
     /**
      * Run the migrations.
-     * appointment_status
+     * Appointment_status
      * 0:    Booked by Patient
      * 1:    Confirmed by Doctor
      * 2:    Confirmed by Patient

@@ -2,19 +2,7 @@
 
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Write prescription for {{$Appointment->Patient_username}}</h2>
-        </div>
-        <div class="pull-right">
-        <a class="btn btn-primary" href="{{ route('appointments.index') }}"> Back</a>
-        </div>
 
-        <div class="pull-right">
-
-    </div>
-</div>
 
 
 @if (count($errors) > 0)
@@ -31,7 +19,7 @@
 
 
 {!! Form::open(array('route' => 'prescription.store','method'=>'POST')) !!}
-<div class="row">
+
 <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
 <input type="number" name="Appointment_id" value= "{{$Appointment->Appointment_id}}" class="form-control" required hidden>
@@ -73,10 +61,7 @@
 <tbody>
 </tbody>
    </table>
-  
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+   <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </div>

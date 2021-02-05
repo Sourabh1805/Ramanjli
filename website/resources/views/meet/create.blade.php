@@ -101,9 +101,8 @@
             <strong> Meet_status </strong>
 
                 <select name="Meet_status" class="form-control" >
-            <option value="0"> Appointment booked </option>
-            <option value="1"> Meets ongoing </option>
-            <option value="2"> Appointment completed </option>
+            <option value="1"> Add new meeting </option>
+            <option value="2"> End meetings for this appointment </option>
             
         </select>
             </div>

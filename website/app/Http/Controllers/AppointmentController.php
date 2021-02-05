@@ -6,6 +6,7 @@ use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\User;
+use App\Models\Meet;
 use Illuminate\Http\Request;
 use DB;
 use Auth; 
@@ -30,7 +31,7 @@ class AppointmentController extends Controller
         $Max = Doctor::first();
         $ok = ""; 
         $Appointments = DB::table('appointments')
-        ->where([['appointment_status', '=', 0]])
+        ->where([['Appointment_status', '=', 0]])
         ->count();
         $appoint = [];
         if($Max!=NULL)
@@ -39,8 +40,8 @@ class AppointmentController extends Controller
         {
 
             $appoint = DB::table("appointments")
-                ->where([["appointment_status", '!=', 1], 
-                ["appointment_status", '!=', 4]])
+                ->where([["Appointment_status", '!=', 1], 
+                ["Appointment_status", '!=', 4]])
                 ->orderBy("Appointment_date")
                 ->get()->toArray(); 
 
@@ -104,7 +105,7 @@ class AppointmentController extends Controller
             }
                 //checking number of booked appointments
                 $Appointments = DB::table('appointments')
-                                    ->where([['appointment_status', '=', 0]])
+                                    ->where([['Appointment_status', '=', 0]])
                                     ->count(); 
                 $hasMoreAppointmentstoday = DB::table("slots")->where([
                     ["Slot_date", "=", $request->Appointment_date], 
@@ -114,11 +115,14 @@ class AppointmentController extends Controller
                     $inputs["Appointment_patient_id"] = $user->id; 
                     $inputs["patient_name"] = $request->Patient_username; 
                     $inputs["Appointment_reason"] = $request->reason; 
-                    $inputs["appointment_status"] = 0; 
+                    $inputs["Appointment_status"] = 0; 
                     $inputs["Appointment_date"] = $request->Appointment_date; 
                     $appointment = Appointment::create($inputs); 
-                    return $appointment; 
-                    return view('meet.create', compact("appointment")) ; 
+                    $meet["Meet_appointment_id"] = $appointment->Appointment_id; 
+                    $meet["Meet_date"] = $request->Appointment_date; 
+                    $meetingData = Meet::create($meet);
+                   
+                    return view('appointments/success', compact("appointment", "meetingData")) ; 
                 }
                 return "Please book appointment for another date"; 
         
@@ -132,7 +136,7 @@ class AppointmentController extends Controller
     public function show(Appointment $appointment)
     {
         $user = User::find($appointment->patient_id);
-        $appointment->appointment_status = 1; 
+        $appointment->Appointment_status = 1; 
         $appointment->save(); 
         
         $key = "ACCEPT"; 
@@ -176,7 +180,7 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        $appointment->appointment_status = 3; 
+        $appointment->Appointment_status = 3; 
         $appointment->save(); 
         $user = User::find($appointment->patient_id);
         $key = "REJECT"; 
@@ -189,7 +193,7 @@ class AppointmentController extends Controller
     public function today()
     { 
         $dt = Carbon::now()->toDateString();
-        $appoint = Appointment::where([['Appointment_date', '=', $dt], ['appointment_status', '=', 1]])->get(); 
+        $appoint = Appointment::where([['Appointment_date', '=', $dt], ['Appointment_status', '=', 1]])->get(); 
         $title = "All Today's Appointment";
         return view("todaysappointment", compact("appoint", "title")); 
     }
@@ -198,15 +202,17 @@ class AppointmentController extends Controller
     {
         $appoint = DB::table("appointments")
         ->join("meets", "meets.Meet_appointment_id", "=", "appointments.Appointment_id")
+        ->join("Patients", "Patients.Patient_user_id", "appointments.Appointment_patient_id")
         ->get()->toArray(); 
-        return $appoint; 
+      //  return $appoint; 
         return view("appointments.history", compact("appoint")); 
     }
     public function all() 
     {
         $appoint = DB::table("appointments")
+        ->join("patients", "patients.Patient_user_id", "appointments.Appointment_patient_id")
         ->get()->toArray(); 
-       // return $appoint; 
+
         return view("appointments.all", compact("appoint")); 
     }
     public function send($email, $key, $mailSubject)

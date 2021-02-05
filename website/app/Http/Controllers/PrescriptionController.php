@@ -68,7 +68,7 @@ class PrescriptionController extends Controller
         }
         // $Appointment = Meet::find($inputs["Meet_id"]); 
 
-        // $Appointment->appointment_status = 4; 
+        // $Appointment->Appointment_status = 4; 
         // $Appointment->save();
         
         $ok = array(); 
@@ -140,7 +140,7 @@ class PrescriptionController extends Controller
         // $Appointment["Appointment_id"] = $Appointment_Record[0]->Appointment_id; 
         // $Appointment["Patient_username"] = $Appointment_Record[0]->Patient_username; 
         // $Appointment["reason"] = $Appointment_Record[0]->reason; 
-        // $Appointment["appointment_status"] = $Appointment_Record[0]->appointment_status; 
+        // $Appointment["Appointment_status"] = $Appointment_Record[0]->Appointment_status; 
         // $Appointment["Appointment_date"] = $Appointment_Record[0]->Appointment_date; 
         // return $Appointment_Record; 
 
@@ -171,7 +171,9 @@ class PrescriptionController extends Controller
     public function edit($Meet_id)
     {
         $Appointment = Meet::find($Meet_id); 
-        return view("prescription.create", compact('Appointment')); 
+        $title = "Write prescription"; 
+        $subtitle = "For meetings"; 
+        return view("prescription.create", compact('Appointment', "title", "subtitle")); 
     }
 
     /**

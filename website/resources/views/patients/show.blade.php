@@ -3,16 +3,6 @@
 
 @section('content')
     <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2> Show Patient Data</h2>
-            </div>
-            
-        </div>
-    </div>
-
-
-    <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Name of Patient:</strong>
@@ -51,18 +41,26 @@
                 @endif
             </div>
         </div>
+    </div>
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <tr>
-            <th>No</th>
-        </tr>
-        @foreach ($patients as $patient)
+        @if($history == NULL)
+            No appointments booked by this patient
+        @else
+        <th>Appointment_reason</th>
+        
+        <th>Appointment_date</th>
+        <th>Appointment_charges</th>
+        <th>Appointment_status</th>
+        <th>Appointment_isPaymentComplete</th>
+        @foreach ($history as $h)
 	    <tr>
         <td> {{$i}} </td>
         <?php $i = $i + 1 ?>
-	        <td>{{ $patient->Patient_username }}</td>
-	        <td>{{ $patient->name }}</td>
-            <td>{{ $patient->Patient_dob }}</td>
-	        <td>{{ $patient->Patient_gender }}</td>
+	        <td>{{ $h["Appointment_reason"] }}</td>
+	        <td>{{ $h["Appointment_date"] }}</td>
+            <td>{{ $h["Appointment_charges"] }}</td>
+	        <td>{{ $h["Appointment_status"] }}</td>
+	        <td>{{ $h["Appointment_isPaymentComplete"] }}</td>
             <td>
                 <form action="{{ route('patients.destroy',$patient->Patient_id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('patients.show',$patient->Patient_id) }}">Show</a>
@@ -73,5 +71,10 @@
 	        </td>
 	    </tr>
 	    @endforeach
-    </div>
+        @endif
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
 @endsection

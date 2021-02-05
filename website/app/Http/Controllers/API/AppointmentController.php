@@ -45,6 +45,20 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'Appointment_reason' => 'required', 
+            'Appointment_date' => 'required', 
+            'Appointment_charges' =>'required', 
+            'Appointment_isPaymentComplete' =>'required', 
+            'Appointment_date' =>'required', 
+            'appointment_status' =>'required', 
+        ]);
+
+        if ($validator->fails()) {
+            $responseArr['message'] = $validator->errors();;
+            return response()->json($responseArr, 400);
+        }     
+
         $user = $request->user();
 
         $inputs["Appointment_patient_id"] = $user->id; 

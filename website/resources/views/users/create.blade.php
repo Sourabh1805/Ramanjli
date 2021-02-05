@@ -74,5 +74,5 @@
 {!! Form::close() !!}
 
 
-<p class="text-center text-primary"><small>Sanitary Shop</small></p>
+<p class="text-center text-primary"><small>Appointment</small></p>
 @endsection

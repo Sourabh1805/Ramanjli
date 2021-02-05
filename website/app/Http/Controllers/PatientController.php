@@ -17,13 +17,19 @@ class PatientController extends Controller
     public function index()
     {
         $user = Auth::user(); 
-        if($user->hasRole("Doctor"))
+        if($user->hasAnyRole(["Admin", "Doctor"]))
         {
             $patients = DB::table("patients")
             ->join("users", "users.id", "patients.Patient_user_id")
             ->get()->toArray(); 
-            return view('patients.index',compact('patients'));
         }
+        else
+        {
+            $user = Auth::user(); 
+            $patients = DB::table("patients")->where("Patient_User_id", "=", $user->id)->get()->toArray(); 
+        }
+        return view('patients.index',compact('patients', "user"));
+
         return back()->with("error", "You are not permitted to access this area"); 
     }
     /**
@@ -33,7 +39,13 @@ class PatientController extends Controller
      */
     public function create()
     {
+        $user = Auth::user(); 
+        if($user->hasRole("Patient"))
+        {
+            return view("users/patients/create", compact("user")); 
+        }
         $users = User::all();
+
         return view('patients.create',compact('users'));
     }
 
@@ -54,10 +66,7 @@ class PatientController extends Controller
         ]);
 
         $inputs = $request->all(); 
-
-
-        // return $request; 
-        
+        //return $request; 
         Patient::create($inputs);
     
 
@@ -72,17 +81,15 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        //return $patient; 
-        $history = DB::table("appointments")
-                        ->where("patient_id", "=", $patient->Patient_id)
-                        ->get()->toArray(); 
-        if($history == NULL) 
-        {
-            $history["message"] = "No appointments booked till today!"; 
-        }
-
         return $patient; 
-        return view('patients.show',compact('patient'));
+        $history = DB::table("appointments")
+                        ->where("Appointment_patient_id", "=", $patient->Patient_id)
+                        ->get()->toArray(); 
+        $patientInfo = $patient; 
+        $title = "Show Patient History"; 
+        $subtitle = "Complete history since day 1"; 
+        //return $history; 
+        return view('patients.show',compact('patient', "history", "title", "subtitle"));
     }
 
     /**

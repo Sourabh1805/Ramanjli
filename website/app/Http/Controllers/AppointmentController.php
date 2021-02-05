@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DB;
@@ -65,8 +66,12 @@ class AppointmentController extends Controller
     public function create()
     {
         $title = "Book a new appointment"; ; 
-        $subtitle = "Your appointment confirmation can take upto 24 hours"; 
-        return view("appointments.create", compact("title", "subtitle")); 
+        $subtitle = "Your appointment confirmation can take upto 24 hours";
+        $user = Auth::user(); 
+        $patients = DB::table("patients")->where("Patient_user_id", "=", $user->id)->get()->toArray(); 
+      //  return $patients;  
+        $patient = Patient::all(); 
+        return view("appointments.create", compact("title", "subtitle", "patient")); 
         //return $Slots; 
     }
 

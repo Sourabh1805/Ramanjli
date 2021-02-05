@@ -10,8 +10,11 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Name of Patient:</strong>
-            {!! Form::text('Patient_username', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
+            <select name="Patient_username" class="form-control" >
+            @foreach($patient as $p)
+            <option value="{{$p->Patient_id}}"> {{$p->Patient_username}} </option>
+            @endforeach
+            </select>        </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">

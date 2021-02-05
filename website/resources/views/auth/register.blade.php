@@ -8,8 +8,8 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+                {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
+                        
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
@@ -53,11 +53,26 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="mobile_no" name="mobile_no" type="number" class="form-control @error('mobile_no') is-invalid @enderror" name="mobile_no" required autocomplete="mobile_no">
+
+                                @error('mobile_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -68,7 +83,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                        {!! Form::close() !!}
                 </div>
             </div>
         </div>

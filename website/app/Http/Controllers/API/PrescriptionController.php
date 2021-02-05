@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Validation\ValidationException;
+use Validator;
+
 class PrescriptionController extends Controller
 {
     /**
@@ -35,7 +38,7 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             "Appointment_id" => "required", 
             "Medicine_Type" => "required", 
             "Medicine_name" => "required", 
@@ -44,6 +47,14 @@ class PrescriptionController extends Controller
             "afternoon" => "required", 
             "morning" => "required"
         ]); 
+
+        
+        if ($validator->fails()) {
+            
+            $responseArr['message'] = $validator->errors();;
+            return response()->json($responseArr, 400);
+        }
+
             
      //   return $request; 
        // return gettype($request->Medicine_Type); 

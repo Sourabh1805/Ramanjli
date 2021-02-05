@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Patient; 
 use DB; 
+
+use Illuminate\Validation\ValidationException;
+use Validator;
+
 class PatientController extends Controller
 {
     /**
@@ -18,7 +22,7 @@ class PatientController extends Controller
         $user = $request->user();
 
         $patients = DB::table("patients")
-                    ->where("User_id", "=", $user->id)
+                    ->where("Patient_user_id", "=", $user->id)
                     ->get()->toArray(); 
         $response = [
             "patient_data" => $patients, 
@@ -45,7 +49,20 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'Patient_username' => 'required', 
+            'Patient_dob' => 'required', 
+            'Patient_gender' =>'required', 
+            'Patient_secret_key' =>'required'
+        ]);
+
+        if ($validator->fails()) {
+            $responseArr['message'] = $validator->errors();;
+            return response()->json($responseArr, 400);
+        }
+
         $user = $request->user();
+
 
         $patientInfo["Patient_user_id"] = $user->id; 
         $patientInfo["Patient_username"] = $request->Patient_username; 
@@ -95,15 +112,18 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate(
-            $request, [
-                "Patient_username" => "required", 
-                "Patient_dob" => "required", 
-                "Patient_gender" => "required", 
-                "Patient_secret_key" => "required", 
-            ]
-            ); 
+        $validator = Validator::make($request->all(), [
+            'Patient_username' => 'required', 
+            'Patient_dob' => 'required', 
+            'Patient_gender' =>'required', 
+            'Patient_secret_key' =>'required'
+        ]);
 
+        if ($validator->fails()) {
+            $responseArr['message'] = $validator->errors();;
+            return response()->json($responseArr, 400);
+        }     
+        
         $patientInfo = Patient::find($id);
         $patientInfo->Patient_username = $request->Patient_username; 
         $patientInfo->Patient_dob = $request->Patient_dob; 

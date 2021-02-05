@@ -39,54 +39,63 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                           
-                        
+                           @can("user-list")
                             <div class="sb-sidenav-menu-heading">Manage here</div>
                             <a class="nav-link" href="{{ route('users.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Manage Users
                             </a>
+                            @endcan
 
-                           
+                           @can("patients-list")
                             <a class="nav-link" href="{{ route('patients.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Patients
                             </a>
+                            @endcan
 
+                            @can("view-today-all-appointments")
                             <a class="nav-link" href="{{ url('today') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 View Today's Appointments
                             </a>
+                            @endcan
 
+                            @can("view-incoming-appointments")
                             <a class="nav-link" href="{{ route('appointments.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Manage incoming Appointments
                             </a>
+                            @endcan
 
+                            @can("manage-slots")
                             <a class="nav-link" href="{{ route('slots.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Manage Slots
                             </a>
-
+                            @endcan
+                            
+                            @can("manage-roles")
                             <a class="nav-link" href="{{ route('roles.index') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Manage Role
                             </a>
+                            @endcan
 
+                            @can("all-appointment-history")
                             <a class="nav-link" href="{{ route('history') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Appointment History
                             </a>
+                            @endcan
 
+                            @can("all-appointments-till-Today")
                             <a class="nav-link" href="{{ route('all') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 All Appointments
                             </a>
+                            @endcan
 
-<!-- 
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a> -->
                            
                         </div>
                     </div>
@@ -111,7 +120,18 @@
                         </div>
                     </div>
                 </main>
-                
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>

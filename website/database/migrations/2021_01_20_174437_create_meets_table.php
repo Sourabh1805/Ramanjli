@@ -16,13 +16,13 @@ class CreateMeetsTable extends Migration
         Schema::create('meets', function (Blueprint $table) {
             $table->bigIncrements('Meet_id');
             $table->string('Meet_appointment_id');
-            $table->string('Meet_treatment');
-            $table->date('Meet_date');
-            $table->string('Meet_note');
+            $table->string('Meet_treatment')->nullable();
+            $table->date('Meet_date')->nullable();
+            $table->string('Meet_note')->nullable();
             $table->string('Meet_charges')->default(0);
             $table->string('Meet_isPaid')->default(0);
-            $table->string('Meet_isHomeVisit');
-            $table->string('Meet_isAdvancePaid');
+            $table->string('Meet_isHomeVisit')->default(0);
+            $table->string('Meet_isAdvancePaid')->default(0);
             $table->string('Meet_status')->default(0);
             $table->timestamps();
         });

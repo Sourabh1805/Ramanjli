@@ -4,18 +4,18 @@ import { COLORS, SIZES, FONTS, icons, images } from "../constants"
 const InputsStyles = StyleSheet.create({
     container: {
         width: '80%',
-        height: SIZES.textboxheight,
-        borderRadius: SIZES.borderRadius,
+        height: SIZES.Textboxheight,
+        borderRadius: SIZES.BorderRadius,
         borderColor: COLORS.primary, 
         marginVertical: 10,
-        borderWidth: 2, 
+        borderWidth: SIZES.BorderWidth, 
     },
     inputContainer: {
         borderBottomWidth: 0
     },
     inputText: {
         fontFamily: 'DM Sans',
-        color: COLORS.white,
+        color: COLORS.TextColor,
         fontWeight: 'bold',
         marginLeft: 10
     }

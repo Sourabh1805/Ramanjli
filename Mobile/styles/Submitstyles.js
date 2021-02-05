@@ -3,9 +3,9 @@ import { COLORS, SIZES, FONTS } from "../constants";
 const Submitstyles = StyleSheet.create({
     container : {
         backgroundColor: COLORS.primary, 
-        width: '50%', 
-        height: SIZES.textboxheight,
-        borderRadius: SIZES.borderRadius,
+        width: SIZES.ButtonWidth, 
+        height: SIZES.Textboxheight,
+        borderRadius: SIZES.BorderRadius,
         alignItems: 'center',
         justifyContent: 'center', 
           
@@ -13,8 +13,7 @@ const Submitstyles = StyleSheet.create({
     submitText: {
         fontSize: 22, 
         fontWeight: 'bold', 
-        color: 'white', 
-        
+        color: 'white',    
     }
     }); 
     

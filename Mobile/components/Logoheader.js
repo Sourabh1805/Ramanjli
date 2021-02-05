@@ -13,6 +13,6 @@ export default class Logoheader extends Component {
 }
 const styles = StyleSheet.create({
     container:{
-        marginVertical:10
+        marginVertical:SIZES.ScrrenTopMargin
     }
 })

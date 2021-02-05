@@ -27,14 +27,14 @@ const HomeScreen = ({navigation}) => {
 
 
   return (
-    <ScrollView style={styles.container}>
-      <StatusBar  />
+    <ScrollView style={{backgroundColor: COLORS.secondary}}> 
+     <View style={styles.container}>
       <View style={styles.sliderContainer}>
         <Swiper
           autoplay
           horizontal={false}
           height={200}
-          activeDotColor="#caf0f8">
+          activeDotColor={COLORS.primary}>
           <View style={styles.slide}>
             <Image
               source= {images.visitingCard}
@@ -59,7 +59,7 @@ const HomeScreen = ({navigation}) => {
         </Swiper>
       </View>
 <Card containerStyle={styles.cardstyle}>
-<View>
+
       <View style={styles.categoryContainer}>
         <TouchableOpacity
           style={styles.categoryBtn}
@@ -120,8 +120,9 @@ const HomeScreen = ({navigation}) => {
           <Text style={styles.categoryBtnTxt}>My Doctor</Text>
         </TouchableOpacity>
         </View>
-      </View>
+     
       </Card>
+      </View>
     </ScrollView>
   );
 };
@@ -130,18 +131,20 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFFFFF", 
-    flex: 1,
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: "center", 
+    marginBottom:SIZES.ScreenBottomMargin,
   },
   sliderContainer: {
     height: 200,
     width: '90%',
-    marginTop: 10,
+    marginTop: SIZES.ScrrenTopMargin,
     justifyContent: 'center',
     alignSelf: 'center',
+    flex: 1,
+    marginBottom:15
   },
-
-  wrapper: {},
 
   slide: {
     flex: 1,
@@ -227,7 +230,9 @@ const styles = StyleSheet.create({
     color: '#444',
   },
   cardstyle: {
-    backgroundColor: "#4A7EFB", 
+    backgroundColor: COLORS.primary, 
     borderRadius: 30,
+    flex:1,
+    width:"90%"
   }
 });

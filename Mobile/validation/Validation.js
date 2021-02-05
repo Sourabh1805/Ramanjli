@@ -13,6 +13,16 @@ export function passwordValidator(password) {
     return ''
   }
 
-const Validation = { emailValidator, passwordValidator};
+
+
+
+export function UserNameValidator(UserName) {
+  
+  if (!UserName || UserName.length <= 0) return "UserName can't be empty."
+  if (UserName.length < 6) return "UserName can't be less than 6 ."
+  return ''
+}
+
+const Validation = { emailValidator, passwordValidator,UserNameValidator};
 
 export default Validation;

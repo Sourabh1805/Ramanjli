@@ -11,23 +11,24 @@ import Toast from 'react-native-toast-native';
 import { COLORS, SIZES, FONTS, ErrorToaststyle, SuccessToaststyle, InfoToaststyle,appConstants } from "../constants";
 
 import { Logoheader } from "../components";
-import { emailValidator,passwordValidator } from "../validation/Validation";
+import { emailValidator,passwordValidator,UserNameValidator } from "../validation/Validation";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
+const AddPatient = props => {
+    const [UserName, setUserName] = useState({ value: '', error: '' })
+    const [Patient_dob, setPatient_dob] = useState({ value: new Date(1598051730000), error: '' })
+    const [Gender, setGender] = useState({ value: '', error: '' })
 
-const LoginScreen = props => {
-    const [Email, setEmail] = useState({ value: '', error: '' })
-    const [Password, setPassword] = useState({ value: '', error: '' })
-
-    const ValidatePassword = (text) =>{
+    const ValidateUserName = (text) =>{
         
-        const passwordError = passwordValidator(text)
+        const UserNameError = UserNameValidator(text)
     
         if (passwordError) {
-            setPassword({ value:text, error: passwordError })
+            setUserName({ value:text, error: UserNameError })
             return
         }
         else  {
-            setPassword({ value:text, error: "" })
+            setUserName({ value:text, error: "" })
             return
         }
     }
@@ -104,18 +105,19 @@ async function login2(){
             
                 <Logoheader></Logoheader>
            
-                <Text style={FONTS.h1}>Welcome back</Text>
-                <Text style={FONTS.h2}>Log in to your existing account</Text>
+                <Text style={FONTS.h1}>Add Patient</Text>
+         
                 <View style={{marginTop: 20}} />
 
 
                 <View style={[InputsStyles.container]}>
                     <Input style={InputsStyles.inputContainer}
-                        onChangeText={(text) => ValidateEmail(text)}
+                        onChangeText={(text) => ValidateUserName(text)}
                         errorStyle={{ color: COLORS.primary }}
-                        error={!!Email.error}
-                        errorMessage={Email.error}
+                        error={!!UserName.error}
+                        errorMessage={UserName.error}
                         inputContainerStyle={InputsStyles.inputContainer}
+                        placeholder="userName"
                         inputStyle={InputsStyles.inputText}
                         leftIcon= {
                             <Icon 
@@ -127,25 +129,12 @@ async function login2(){
                         }
                     />
                 </View>
+
+
+
+               
             
-            <View style={[InputsStyles.container]}>
-                <Input 
-                    inputContainerStyle={InputsStyles.inputContainer}
-                    inputStyle={InputsStyles.inputText}
-                    onChangeText={(text) => ValidatePassword(text)}
-                    errorStyle={{ color: COLORS.primary }}
-                    error={!!Password.error}
-                    errorMessage={Password.error}
-                    secureTextEntry={true}
-                    leftIcon= {
-                        <Icon 
-                            name= "lock"
-                            size={SIZES.IconSize}   
-                            color={COLORS.black}
-                        />
-                    }
-                />
-            </View>
+           
                 <View style={{width: '90%', margin: 5, marginBottom: 5}}>
                     <Text style={[styles.textBody], {alignSelf: 'flex-end',color:COLORS.TextColor}}>Forgot Password?</Text>
                 </View>
@@ -185,4 +174,4 @@ const styles = StyleSheet.create({
    
 });
 
-export default LoginScreen;
+export default AddPatient;

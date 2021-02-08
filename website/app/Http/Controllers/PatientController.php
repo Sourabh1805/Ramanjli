@@ -62,10 +62,12 @@ class PatientController extends Controller
             'Patient_user_id' => 'required',
             'Patient_dob' => 'required',
             'Patient_gender' => 'required',
-            'Patient_secret_key' => 'required',
+          //  'Patient_secret_key' => 'required',
         ]);
 
-        $inputs = $request->all(); 
+        $inputs = $request->all();
+        $temp = mt_rand(100000, 999999);         
+        $inputs["Patient_secret_key"] = $temp; 
         //return $request; 
         Patient::create($inputs);
     
@@ -81,7 +83,7 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        return $patient; 
+      //  return $patient; 
         $history = DB::table("appointments")
                         ->where("Appointment_patient_id", "=", $patient->Patient_id)
                         ->get()->toArray(); 

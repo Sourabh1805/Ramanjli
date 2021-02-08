@@ -40,21 +40,44 @@ class PrescriptionController extends Controller
      */
     public function store(Request $request)
     {
+     //   return $request->Meet_id; 
         $this->validate($request, [
-            "Meet_id" => "required", 
+            "Meet_id" =>"required", 
+            "Meet_appointment_id" => "required", 
             "Medicine_Type" => "required", 
             "Medicine_name" => "required", 
             "Medicine_quantity" => "required", 
             "night" => "required", 
             "afternoon" => "required", 
-            "morning" => "required"
+            "Meet_appointment_id" => "required", 
+            "Meet_treatment" => "required", 
+            "Meet_date" => "required", 
+            "Meet_note" => "required", 
+            "Meet_charges" => "required", 
+            "Meet_isPaid" => "required", 
+            "Meet_status" => "required", 
+            "Meet_isHomeVisit" => "required", 
+            "Meet_isAdvancePaid" => "required"
         ]); 
             
+
      //   return $request; 
        // return gettype($request->Medicine_Type); 
         $inputs = $request->all();
+   //return $inputs["Meet_id"]; 
         $prescriptionData = []; 
-            return $inputs; 
+        $meetInfo = Meet::find($inputs["Meet_id"]); 
+                //->get()->toArray(); //Meet::find($inputs["Meet_id"]); 
+         
+        $meetInfo->Meet_treatment = $request->Meet_treatment;         
+        $meetInfo->Meet_date = $inputs["Meet_date"]; 
+        $meetInfo->Meet_note = $inputs["Meet_note"]; 
+        $meetInfo->Meet_charges = $inputs["Meet_charges"]; 
+        $meetInfo->Meet_isPaid = $inputs["Meet_isPaid"]; 
+        $meetInfo->Meet_status = $inputs["Meet_status"]; 
+        $meetInfo->Meet_isHomeVisit = $inputs["Meet_isHomeVisit"]; 
+        $meetInfo->Meet_isAdvancePaid = $inputs["Meet_isAdvancePaid"]; 
+         $meetInfo->save(); 
         for($i=0; $i<count($inputs["Medicine_name"]); $i++)
         {
             $prescriptionValue = []; 
@@ -66,10 +89,10 @@ class PrescriptionController extends Controller
             $prescriptionValue["night"] = $inputs["night"][$i];
             array_push($prescriptionData, $prescriptionValue); 
         }
-        // $Appointment = Meet::find($inputs["Meet_id"]); 
+         $Appointment = Meet::find($inputs["Meet_id"]); 
 
-        // $Appointment->Appointment_status = 4; 
-        // $Appointment->save();
+         $Appointment->Meet_status = 4; 
+         $Appointment->save();
         
         $ok = array(); 
         $ok["Meet_id"] = $inputs['Meet_id']; 
@@ -83,8 +106,11 @@ class PrescriptionController extends Controller
 
         $Medicine_time = $morning.",".$afternoon.",".$night; 
         $ok["Medicine_time"] = $Medicine_time; 
-
+      //  $ok["Meet_id"] = $request->Meet_id; 
+       // return $ok; 
         $prescription = Prescription::create($ok);
+        $prescription->Meet_id = $inputs['Meet_id'];
+        $prescription->save(); 
 
        // return $prescriptionData[0];//["Medicine_Type"]; 
         return view("prescription.view", compact("prescriptionData", "Appointment"));
@@ -96,42 +122,48 @@ class PrescriptionController extends Controller
      * @param  \App\Models\Prescription  $prescription
      * @return \Illuminate\Http\Response
      */
-    public function show($Appointment_id)
+    public function show($Meet_id)
     {
-        $Appointment = DB::table("appointments")
-        ->where([["appointments.Appointment_id", "=", $Appointment_id]])
-        ->join("prescriptions", "prescriptions.Appointment_id", "=", "appointments.Appointment_id")
+        $meets = DB::table("meets")
+        ->where([["meets.Meet_id", "=", $Meet_id]])
+        ->join("prescriptions", "prescriptions.Meet_id", "=", "meets.Meet_id")
         ->get()->toArray(); 
+        
+        $patientInfo = DB::table("meets")
+        ->where([["meets.Meet_id", "=", $Meet_id]])
+        ->join("appointments", "appointments.Appointment_id", "meets.Meet_appointment_id")
+        ->join("patients", "patients.Patient_user_id", "appointments.Appointment_patient_id")
+        ->get()->toArray(); 
+        
+        //return $patientInfo->Patient_username; 
 
-        $Appointment[0]->Medicine_Type =  explode(',', $Appointment[0]->Medicine_Type);
-        $Appointment[0]->Medicine_name =  explode(',', $Appointment[0]->Medicine_name);
-        $Appointment[0]->Medicine_quantity =  explode(',', $Appointment[0]->Medicine_quantity);
-        $Appointment[0]->Medicine_time =  explode(',', $Appointment[0]->Medicine_time);
+        $meets[0]->Medicine_Type =  explode(',', $meets[0]->Medicine_Type);
+        $meets[0]->Medicine_name =  explode(',', $meets[0]->Medicine_name);
+        $meets[0]->Medicine_quantity =  explode(',', $meets[0]->Medicine_quantity);
+        $meets[0]->Medicine_time =  explode(',', $meets[0]->Medicine_time);
         $morning = 0; 
         $afternoon = 1; 
         $night = 2;
         $prescriptionData = []; 
         //return $Appointment_Record[0]->Medicine_name; 
-        for($i=0; $i<count($Appointment[0]->Medicine_name); $i++)
+        for($i=0; $i<count($meets[0]->Medicine_name); $i++)
         {
             $prescriptionValue = []; 
-            $prescriptionValue["Medicine_Type"] = $Appointment[0]->Medicine_Type[$i];
-            $prescriptionValue["Medicine_name"] = $Appointment[0]->Medicine_name[$i];
-            $prescriptionValue["Medicine_quantity"] = $Appointment[0]->Medicine_quantity[$i];
-            $prescriptionValue["morning"] = $Appointment[0]->Medicine_time[$morning];
+            $prescriptionValue["Medicine_Type"] = $meets[0]->Medicine_Type[$i];
+            $prescriptionValue["Medicine_name"] = $meets[0]->Medicine_name[$i];
+            $prescriptionValue["Medicine_quantity"] = $meets[0]->Medicine_quantity[$i];
+            $prescriptionValue["morning"] = $meets[0]->Medicine_time[$morning];
             $morning = $morning + 3; 
-            $prescriptionValue["afternoon"] = $Appointment[0]->Medicine_time[$afternoon];
+            $prescriptionValue["afternoon"] = $meets[0]->Medicine_time[$afternoon];
             $afternoon = $afternoon + 3; 
 
-            $prescriptionValue["night"] = $Appointment[0]->Medicine_time[$night];
+            $prescriptionValue["night"] = $meets[0]->Medicine_time[$night];
             $night = $night + 3; 
 
             array_push($prescriptionData, $prescriptionValue); 
-        } 
-
-      //   return $Appointment; 
-
-     return view("prescription.show", compact("prescriptionData", "Appointment"));
+        }           
+// return $meets[0]->Meet_date; 
+     return view("prescription.show", compact("prescriptionData", "meets", "patientInfo"));
 
 
         // $Appointment = [];
@@ -170,10 +202,12 @@ class PrescriptionController extends Controller
      */
     public function edit($Meet_id)
     {
-        $Appointment = Meet::find($Meet_id); 
+        $meetInfo = Meet::find($Meet_id); 
+         
         $title = "Write prescription"; 
         $subtitle = "For meetings"; 
-        return view("prescription.create", compact('Appointment', "title", "subtitle")); 
+        
+        return view("meet.submission", compact('meetInfo', "title", "subtitle", "Meet_id")); 
     }
 
     /**

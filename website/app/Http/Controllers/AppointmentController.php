@@ -34,17 +34,24 @@ class AppointmentController extends Controller
         ->where([['Appointment_status', '=', 0]])
         ->count();
         $appoint = [];
+         
         if($Max!=NULL)
        { 
-           if($Max["Doctor_maximum_number_of_appointments"]  >= $Appointments)
+           if($Max["Doctor_clinic_max_appointments"]  >= $Appointments)
         {
 
             $appoint = DB::table("appointments")
                 ->where([["Appointment_status", '!=', 1], 
                 ["Appointment_status", '!=', 4]])
+                ->join("patients", "patients.Patient_user_id", "appointments.Appointment_patient_id")
                 ->orderBy("Appointment_date")
                 ->get()->toArray(); 
 
+            // $patientInfo = DB::table("patients")
+            //             ->where("Patient_user_id", '=', $appoint[0]->Appointment_patient_id)
+            //             ->get()->toArray(); 
+            // return $patientInfo; 
+            // return $appoint; 
             if($appoint == NULL)
             {
                 $title = "Appointment Management"; 
@@ -53,6 +60,8 @@ class AppointmentController extends Controller
             }
             $title = "Appointment Management"; 
             $subtitle = "Note: Confirm appointments for today";
+            
+
             return view("appointments.index", compact("title","subtitle",  "appoint"));
         }}
         $ok = "Maximum number of appointments have been booked for the day";
@@ -135,14 +144,15 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        $user = User::find($appointment->patient_id);
+        $user = User::find($appointment->Appointment_patient_id);
+        
         $appointment->Appointment_status = 1; 
         $appointment->save(); 
         
         $key = "ACCEPT"; 
         $mailSubject = "Your Appointment has been accepted";
-
-        $email = $user->email; 
+         
+        $email = $user["email"]; 
         $this->send($email, $key, $mailSubject);        
         
         return back()->with('success', "Appointment accepted"); 

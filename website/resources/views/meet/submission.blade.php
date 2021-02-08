@@ -19,45 +19,46 @@
 
 
 {!! Form::open(array('route' => 'prescription.store','method'=>'POST')) !!}
-
-<div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-<input type="number" name="Appointment_id" value= "{{$meetInfo->Appointment_id}}" class="form-control" required hidden>
-        </div>
-
-        <div class="row">
+    
+<div class="row col-xs-12 col-sm-12 col-md-6">
         
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <input type="text" class="form-control" name="Meet_appointment_id" value="{{$meetInfo->Appointment_id}}" hidden>
+                <input type="text" class="form-control" name="Meet_appointment_id" value="{{$meetInfo->Meet_appointment_id}}" hidden>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <input type="text" class="form-control" name="Meet_id" value="{{$meetInfo->Meet_id}}" hidden>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
             <strong> Treatment given  </strong>
-                <input type="text" class="form-control" name="Meet_treatment" placeholder = "Treatment given ">
+                <input type="text" class="form-control" name="Meet_treatment" value="{{$meetInfo->Meet_treatment}}" placeholder = "Treatment given" required>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
             <strong> Meeting date </strong>
-                <input type="date" class="form-control" name="Meet_date" >
+                <input type="date" class="form-control" name="Meet_date" value="{{$meetInfo->Meet_date}}" required>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
             <strong> Meet_note </strong>
-                <input type="text" class="form-control" name="Meet_note" >
+                <input type="text" class="form-control" name="Meet_note" value="{{$meetInfo->Meet_note}}" required>
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
             <strong> Meet_charges </strong>
-                <input type="text" class="form-control" name="Meet_charges" >
+                <input type="number" class="form-control" name="Meet_charges" value="{{$meetInfo->Meet_charges}}" required>
             </div>
         </div>
 
@@ -65,7 +66,7 @@
             <div class="form-group">
             <strong> Meet_isPaid </strong>
 
-                <select name="Meet_isPaid" class="form-control" >
+                <select name="Meet_isPaid" class="form-control" value="{{$meetInfo->Meet_isPaid}}" required>
             <option value="0"> YES </option>
             <option value="1"> NO </option>
         </select>
@@ -76,7 +77,7 @@
             <div class="form-group">
             <strong> Meet_isHomeVisit </strong>
 
-                <select name="Meet_isHomeVisit" class="form-control" >
+                <select name="Meet_isHomeVisit" class="form-control" value="{{$meetInfo->Meet_isHomeVisit}}" required>
             <option value="0"> YES </option>
             <option value="1"> NO </option>
         </select>
@@ -87,7 +88,7 @@
             <div class="form-group">
             <strong> Meet_isAdvancePaid </strong>
 
-                <select name="Meet_isAdvancePaid" class="form-control" >
+                <select name="Meet_isAdvancePaid" class="form-control" value="{{$meetInfo->Meet_isAdvancePaid}}" required>
             <option value="0"> YES </option>
             <option value="1"> NO </option>
         </select>
@@ -98,26 +99,20 @@
             <div class="form-group">
             <strong> Meet_status </strong>
 
-                <select name="Meet_status" class="form-control" >
-            <option value="1"> Add new meeting to this appointment </option>
+                <select name="Meet_status" class="form-control" value="{{$meetInfo->Meet_status}}" required>
+            <option value="1"> Add new meeting </option>
             <option value="2"> End meetings for this appointment </option>
             
         </select>
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-            <strong> Meet_note </strong>
-                <input type="text" class="form-control" name="Meet_note" >
-            </div>
-        </div>
-
-      
+       
+   
+</div>
 
 
-    </div>
-    <table class="table table-bordered">
+<table class="table table-bordered">
 <thead>
 <th>Type of Medicine</th>
 <th>Name of medicine</th>
@@ -130,15 +125,11 @@
 </thead>
 <tbody>
 </tbody>
+
    </table>
-
-   
-
    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-</div>
-</div>
 {!! Form::close() !!}
 @endsection
 

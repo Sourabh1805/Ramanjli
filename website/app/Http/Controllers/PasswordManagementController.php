@@ -68,6 +68,15 @@ class PasswordManagementController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required', 
+        ]);
+
+        if ($validator->fails()) {
+            $responseArr['message'] = $validator->errors();;
+            return response()->json($responseArr, 400);
+        }
+
         $email = $request->email;
         $user1 = User::where('email', $email)->get()->toArray();
         if(sizeof($user1) == 0)

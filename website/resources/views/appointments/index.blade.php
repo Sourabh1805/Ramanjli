@@ -35,49 +35,49 @@
  
 <?php $i=0 ?>
 
- @foreach ($appoint as $key => $user)
+ @foreach ($appoint as $key => $row)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $user->Patient_username }}</td>
-    <td>{{ $user->Appointment_reason }}</td>
+    <td>{{ $row->Patient_username }}</td>
+    <td>{{ $row->Appointment_reason }}</td>
     <td>
-    @if($user->Appointment_status == 0)
+    @if($row->Appointment_status == 0)
     Booked by Patient
-    @elseif($user->Appointment_status==1)
+    @elseif($row->Appointment_status==1)
     Confirmed by Doctor
-    @elseif($user->Appointment_status==2)
+    @elseif($row->Appointment_status==2)
     Confirmed by Patient
-    @elseif($user->Appointment_status==3)
+    @elseif($row->Appointment_status==3)
     Rejected by Doctor
-    @elseif($user->Appointment_status==4)
+    @elseif($row->Appointment_status==4)
     Appointment completed
     @else
     Unable to load status
     @endif
     </td>
 <td>
-{{$user->Appointment_date}}
+{{$row->Appointment_date}}
 </td>
 
 
     <td>   
 
-    <!-- @if($user->Appointment_status==1)
-    <a class="btn btn-success" href="{{ route('appointments.edit',$user->Appointment_id) }}">Reschedule this Appointment</a>
+    <!-- @if($row->Appointment_status==1)
+    <a class="btn btn-success" href="{{ route('appointments.edit',$row->Appointment_id) }}">Reschedule this Appointment</a>
     </td>
     <td>
-    {!! Form::open(['method' => 'DELETE','route' => ['appointments.destroy', $user->Appointment_id],'style'=>'display:inline']) !!}
+    {!! Form::open(['method' => 'DELETE','route' => ['appointments.destroy', $row->Appointment_id],'style'=>'display:inline']) !!}
             {!! Form::submit('Reject Appointment', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!} -->
     <!-- @else -->
-       <a class="btn btn-info" href="{{ route('appointments.show',$user->Appointment_id) }}">Confirm Appointment</a>
+       <a class="btn btn-info" href="{{ route('appointments.show',$row->Appointment_id) }}">Confirm Appointment</a>
        </td>
        <td>
-        {!! Form::open(['method' => 'DELETE','route' => ['appointments.destroy', $user->Appointment_id],'style'=>'display:inline']) !!}
+        {!! Form::open(['method' => 'DELETE','route' => ['appointments.destroy', $row->Appointment_id],'style'=>'display:inline']) !!}
             {!! Form::submit('Reject Appointment', ['class' => 'btn btn-danger']) !!}
         {!! Form::close() !!}
     <!-- @endif -->
-        <!-- <a class="btn btn-primary" href="{{ route('appointments.edit',$user->Appointment_id) }}">Reschedule</a> -->
+        <!-- <a class="btn btn-primary" href="{{ route('appointments.edit',$row->Appointment_id) }}">Reschedule</a> -->
         
 
     </td>

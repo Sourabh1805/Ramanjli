@@ -83,6 +83,7 @@
             ?>
             @if($pre == NULL)
             <a class="btn btn-success" href="{{ route('prescription.edit',$meet->Meet_id) }}">
+            
             Create Prescription 
             </a>
 

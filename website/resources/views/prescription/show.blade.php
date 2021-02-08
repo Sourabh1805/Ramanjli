@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Prescription for :: {{$Appointment[0]->Patient_username}}</h2>
+            <h2>Prescription for :: {{$patientInfo[0]->Patient_username}}</h2>
         </div>
         <div class="pull-right">
         <a class="btn btn-primary" href="{{ route('appointments.index') }}"> Back</a>
@@ -32,7 +32,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
         <br>
-        Appointment Date: {{$Appointment[0]->Appointment_date}}
+        Appointment Date: {{$meets[0]->Meet_date}}
         <br>
         <table class="table table-bordered" width="100%" cellspacing="0">
 

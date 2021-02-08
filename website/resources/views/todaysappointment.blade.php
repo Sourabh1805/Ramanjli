@@ -22,7 +22,7 @@
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
  <tr>
    <th>No</th>
-   <th>Patient Name</th>
+   <th>Parent Name</th>
    <th>Reason</th>
    <th width="280px">Show meets</th>
  </tr>

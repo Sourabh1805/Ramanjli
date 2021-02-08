@@ -53,7 +53,6 @@ class PatientController extends Controller
             'Patient_username' => 'required', 
             'Patient_dob' => 'required', 
             'Patient_gender' =>'required', 
-            'Patient_secret_key' =>'required'
         ]);
 
         if ($validator->fails()) {
@@ -118,7 +117,7 @@ class PatientController extends Controller
             'Patient_username' => 'required', 
             'Patient_dob' => 'required', 
             'Patient_gender' =>'required', 
-            'Patient_secret_key' =>'required'
+         //   'Patient_secret_key' =>'required'
         ]);
 
         if ($validator->fails()) {
@@ -130,7 +129,7 @@ class PatientController extends Controller
         $patientInfo->Patient_username = $request->Patient_username;
         $patientInfo->Patient_dob = $request->Patient_dob;
         $patientInfo->Patient_gender = $request->Patient_gender;
-        $patientInfo->Patient_secret_key = $request->Patient_secret_key;
+        //$patientInfo->Patient_secret_key = $request->Patient_secret_key;
         $patientInfo->save();
         return response($response, 200);
     }
